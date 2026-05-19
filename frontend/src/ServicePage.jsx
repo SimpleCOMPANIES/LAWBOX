@@ -190,6 +190,93 @@ const SERVICE_DATA = {
     ],
   },
 
+  'policy-limits': {
+    title: 'Policy Limits',
+    subtitle: 'Pre-suit insurance investigation and coverage tracing. Coordinated through Coastal Research.',
+    customSections: [
+      {
+        type: 'header-para',
+        heading: 'The Problem',
+        body: "If you do not know what the policy is worth, you do not know what your case is worth. Insurance carriers disclose primary policy limits and stop there. Umbrella policies, excess layers, additional insured coverage, employer policies, and related sources stay quiet, and you are expected to assume those layers do not exist. Attorneys settle at stated limits when the real ceiling is often two or three times higher, and every dollar of unknown coverage is a dollar that never lands in the client's pocket. Worse, when an adjuster intentionally withholds coverage information, you never know enough to call it what it is or pursue the bad faith leverage that comes with it.",
+      },
+      {
+        type: 'header-para',
+        heading: 'What We Deliver',
+        body: 'A structured pre-suit insurance investigation that traces every available coverage source before the demand letter goes out. The investigation reviews primary policies, excess layers, umbrella policies, additional insured endorsements, scheduled vehicles, and employer-level coverage. Results are documented, reportable, and delivered fast enough to inform your treatment plan, your UIM strategy, and your demand timing. LawBOX™ coordinates this through Coastal Research, a pre-litigation research partner used by top personal injury firms across the country.',
+      },
+      {
+        type: 'numbered-benefits',
+        heading: 'The Benefits',
+        items: [
+          { title: 'Know the real ceiling.', body: 'Demand and settle at the full available coverage, not at the number the carrier offered to admit. Every case gets valued against a confirmed exposure number rather than a hopeful guess. Over a year of files, the difference is hundreds of thousands of dollars in client recovery that would otherwise have been left on the table.' },
+          { title: 'Demand with weight.', body: 'A demand letter backed by verified coverage data carries far more authority on an adjuster\'s desk than a demand built on assumption. Adjusters move faster, offer earlier, and negotiate at higher numbers when they know your firm has already done the work to identify every available source.' },
+          { title: 'Catch nondisclosure.', body: 'When a carrier or adjuster has concealed additional coverage, the discovery is a bad faith claim in your hand rather than a regret in your file. The same investigation that identifies the coverage builds the documentary record you would need to pursue the carrier in extra-contractual litigation.' },
+          { title: 'Better case selection.', body: 'Sign cases on real exposure. Decline cases on real exposure. Stop tying up firm resources on matters where actual coverage will never justify the operational lift, and stop turning away cases that look small on paper but sit on top of large excess or umbrella layers.' },
+          { title: 'Strategy from day one.', body: 'Treatment plans, UIM elections, demand timing, lien identification, and resolution strategy all get decided with information instead of guesses. Cases move faster because every downstream decision has a confirmed coverage number behind it.' },
+        ],
+      },
+      { type: 'tagline', text: "Don't demand blind." },
+    ],
+  },
+
+  'lien-resolution': {
+    title: 'Lien Resolution',
+    subtitle: 'Audit, negotiation, appeals, and final release of every medical lien. Coordinated through Zipliens.',
+    customSections: [
+      {
+        type: 'header-para',
+        heading: 'The Problem',
+        body: "Lien resolution is where good cases go to die slow. Medicare conditional payment letters take months to come back. Medicaid rules change at the state line. ERISA plans demand full reimbursement and rarely budge without specialist arguments. Hospital liens turn on statutes most paralegals have never read. Lienholders inflate reimbursement claims because they know the average firm does not have the time or the training to audit them. Meanwhile your client is calling weekly asking where the money is, your trust account is stuck holding the settlement, and your fee is delayed every week the file sits open. Cases that should close in thirty days close in ninety, and the client experience you built over the life of the matter gets cracked in the last leg.",
+      },
+      {
+        type: 'header-para',
+        heading: 'What We Deliver',
+        body: 'End-to-end lien handling across every category of medical lien, subrogation claim, and reimbursement obligation. Specialists audit and review each submitted lien, request and analyze supporting documentation, verify claim validity and payment accuracy, negotiate reductions and waivers, manage appeals and dispute correspondence where appropriate, and obtain final lien releases and proof of satisfaction. Status updates are delivered throughout the process so your firm always knows where each lien stands without chasing it down. LawBOX™ coordinates this through Zipliens, a lien resolution partner trusted by top personal injury firms nationwide.',
+      },
+      {
+        type: 'numbered-benefits',
+        heading: 'The Benefits',
+        items: [
+          { title: "More money in the client's pocket.", body: 'Specialist negotiation extracts reductions, waivers, and settlements that a generalist team would never get. Multiplied across a high-volume caseload, the additional client recovery becomes material, and it builds the referral economics that drive the firm\'s next year of growth.' },
+          { title: 'Every lien type, one partner.', body: 'Medicare Parts A, B, C, and D. Medicaid in all 50 states. ERISA, non-ERISA, and FEHBA private plans. VA, CHAMPVA, and Tricare. Hospital liens. Outstanding provider bills. Short-term disability liens. Subrogation. Mass tort resolution programs. One partner, one workflow, one portal — instead of five different specialists for five different categories.' },
+          { title: 'Inflated claims caught.', body: 'Every submitted lien gets audited against supporting documentation before a dollar gets paid. Unrelated treatment is removed, duplicate charges are challenged, and the final reimbursement reflects what is actually owed under the contract or the statute — not the opening demand from the lienholder.' },
+          { title: 'Appeals handled by specialists.', body: 'When a lienholder will not move, the fight is run by people trained for it. Appeals and dispute correspondence are managed without burning attorney or paralegal hours, and without leaving leverage on the table because no one had time to push back.' },
+          { title: 'Real closure.', body: 'Final releases and proof of satisfaction are obtained on every lien. The case actually closes, the trust account releases, and the file is audit-ready if anyone ever comes back asking who got paid what. No more open files waiting on paperwork from a lienholder that disappeared after the negotiation.' },
+        ],
+      },
+      { type: 'tagline', text: 'Audit. Reduce. Resolve. Release.' },
+    ],
+  },
+
+  'settlement-disbursement': {
+    title: 'Settlement Disbursement',
+    subtitle: 'Digital disbursement and trust money management for injury law firms. Coordinated through Confido Legal.',
+    customSections: [
+      {
+        type: 'header-para',
+        heading: 'The Problem',
+        body: "Settlement day should be the day your client refers two friends to your firm. For most firms it is the day your client starts wondering if you forgot about them. Paper checks get cut to the client, the lienholders, the medical providers, the referral attorney, and the firm — each one a manual reconciliation, a trust accounting risk, and a chance for the wrong amount to land in the wrong account. Admin staff burn hours per case clearing the back office. IOLTA reconciliation becomes a monthly fire drill. Clients wait two or three weeks for money they already won. The goodwill your firm built over twelve months gets spent in the last forty-eight hours, and the referral pipeline that depends on the close-of-case moment quietly dries up.",
+      },
+      {
+        type: 'header-para',
+        heading: 'What We Deliver',
+        body: 'Digital disbursement and trust money management designed specifically for personal injury firms. The moment a settlement is finalized, a single workflow triggers — automatic splits to client, lienholders, medical providers, referral counsel, and the firm — routed straight from your trust or operating account with a full audit trail. Paper checks disappear, manual reconciliation collapses, and trust accounting compliance is built into every transaction. LawBOX™ coordinates this through Confido Legal, a payments and money management platform built specifically for personal injury law firms.',
+      },
+      {
+        type: 'numbered-benefits',
+        heading: 'The Benefits',
+        items: [
+          { title: 'Faster client payouts.', body: 'Settlement day actually feels like settlement day. The client receives their net recovery the moment the disbursement workflow runs, not three weeks later when the bookkeeper finishes cutting checks. Happy clients turn into referrals, and the referrals that come from the close of one case become the intakes that fund the next.' },
+          { title: 'No more paper checks.', body: 'Digital disbursements go directly to the client, the lienholders, the medical providers, and referral counsel. No lost mail, no stop-payment fees, no follow-up calls about checks that never arrived. The administrative cost of physically moving money disappears.' },
+          { title: 'Trust compliance baked in.', body: 'Every transaction is tracked, every disbursement is audit-ready, and every IOLTA reconciliation is cleaner. The compliance burden that hangs over every PI firm\'s back office becomes something the system handles in the background rather than something the firm has to manage every month.' },
+          { title: 'One workflow for every split.', body: 'Client portion, medical liens, attorney fee, referral counsel, provider bills — distributed in one workflow, not five separate reconciliation cycles. The math is right, the recipients are right, and the records are clean.' },
+          { title: 'Hours back at case close.', body: 'Admin time per settlement collapses dramatically. Multiply that across every settled case in a year and the back-office burden disappears, freeing your staff to handle volume that previously felt impossible at the firm\'s current headcount.' },
+        ],
+      },
+      { type: 'tagline', text: 'Win the case. Then win the close.' },
+    ],
+  },
+
   'tax-strategy': {
     title: 'Tax Strategy & Settlement Tax Planning Coordination',
     subtitle: 'Proactive tax planning for PI firm owners and smarter settlement tax coordination for client outcomes',
@@ -551,8 +638,44 @@ export default function ServicePage({ serviceId, onNavigate, onNavigateContact }
             </div>
           )}
 
-          {/* Custom sections (Tax Strategy) */}
+          {/* Custom sections (Tax Strategy + Policy Limits / Lien Resolution / Settlement) */}
           {service.customSections && service.customSections.map((section, i) => {
+            if (section.type === 'header-para') {
+              return (
+                <div key={i} className="mb-12">
+                  <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#C9A961' }}>{section.heading}</p>
+                  <p className="text-lg leading-relaxed" style={{ color: '#334155' }}>{section.body}</p>
+                </div>
+              );
+            }
+
+            if (section.type === 'numbered-benefits') {
+              return (
+                <div key={i} className="mb-12">
+                  <p className="text-xs font-bold uppercase tracking-widest mb-6" style={{ color: '#C9A961' }}>{section.heading}</p>
+                  <div className="flex flex-col divide-y" style={{ borderColor: 'rgba(201,169,97,0.2)', borderTop: '1px solid rgba(201,169,97,0.2)', borderBottom: '1px solid rgba(201,169,97,0.2)' }}>
+                    {section.items.map((item, j) => (
+                      <div key={j} className="flex gap-5 py-6">
+                        <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center font-bold text-sm rounded" style={{ backgroundColor: '#0A1628', color: '#C9A961' }}>{j + 1}</div>
+                        <div>
+                          <span className="font-bold" style={{ color: '#0A1628' }}>{item.title}</span>{' '}
+                          <span className="text-base leading-relaxed" style={{ color: '#334155' }}>{item.body}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
+            if (section.type === 'tagline') {
+              return (
+                <div key={i} className="mt-8 pt-8 border-t" style={{ borderColor: 'rgba(201,169,97,0.3)' }}>
+                  <p className="font-serif text-xl font-semibold italic" style={{ color: '#C9A961' }}>{section.text}</p>
+                </div>
+              );
+            }
+
             if (section.type === 'positioningNote') {
               return (
                 <div key={i} className="mt-16 p-8 rounded-lg" style={{ backgroundColor: '#0A1628' }}>

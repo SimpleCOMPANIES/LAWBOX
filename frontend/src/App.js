@@ -16,6 +16,9 @@ const SERVICE_PAGES = [
   'fractional-cmo',
   'fractional-caio',
   'tax-strategy',
+  'policy-limits',
+  'lien-resolution',
+  'settlement-disbursement',
 ];
 
 function App() {

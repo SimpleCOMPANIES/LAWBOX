@@ -112,100 +112,138 @@ export default function Home({ onNavigateContact, onNavigate }) {
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
+        .stats-bar-bg { background-color: #9E9E9E; }
+        @media (max-width: 767px) {
+          .stats-bar-bg { background-color: #000000; }
+        }
+
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .marquee-track {
+          display: flex;
+          animation: marquee 35s linear infinite;
+          width: max-content;
+        }
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
+        .marquee-item {
+          padding: 0 1.25rem;
+        }
+        .marquee-logo {
+          height: 44px;
+          width: auto;
+          max-width: 130px;
+          object-fit: contain;
+          display: block;
+        }
+        @media (min-width: 768px) {
+          .marquee-item { padding: 0 3rem; }
+          .marquee-logo { height: 70px; max-width: 200px; }
+        }
+
       `}</style>
       {/* Hero Section - Nav + Hero share one background container */}
-      <section className="relative pb-16 sm:pb-20 md:pb-28 overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #0A1628, #1A2740, #0A1628)' }}>
+      <section className="relative md:min-h-screen flex flex-col overflow-hidden" style={{ background: '#F5F5F5' }}>
+
+        {/* Desktop: full-bleed background image */}
+        <img
+          src="/images/hero-office.jpg.png"
+          alt=""
+          className="hidden md:block absolute inset-0 z-0 w-full h-full object-cover object-[center_30%]"
+        />
+
+{/* Bottom fade — desktop only */}
+        <div className="hidden md:block absolute bottom-0 left-0 right-0 z-10 pointer-events-none" style={{ height: '140px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.68))' }} />
 
         {/* Navigation - inside hero for seamless background */}
         <nav className="relative z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="w-full px-4">
             <div className="flex items-center justify-between h-16 md:h-20">
-              <Logo variant="inverse" size="small" className="h-10 md:h-11 w-auto" />
-              
-              <div className="hidden md:flex items-center gap-8">
-                <a href="#how-it-works" className="text-sm font-semibold transition-colors" style={{ color: 'rgba(255, 255, 255, 0.85)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.85)'}>How it Works</a>
-                <a href="#lawfirm-in-a-box" className="text-sm font-semibold transition-colors" style={{ color: 'rgba(255, 255, 255, 0.85)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.85)'}>LawFirm In A Box</a>
+
+              {/* Left: About first, Services last */}
+              <div className="hidden md:flex items-center gap-8 ml-32">
+                <a href="#team" className="text-base font-bold transition-colors" style={{ color: '#FFFFFF' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}>About</a>
+                <a href="#how-it-works" className="text-base font-bold transition-colors" style={{ color: '#FFFFFF' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}>How We Work</a>
+                <a href="#lawfirm-in-a-box" className="text-base font-bold transition-colors" style={{ color: '#FFFFFF' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}>LawFirm In A Box</a>
                 <button
-                  className="text-sm font-semibold transition-colors"
-                  style={{ color: 'rgba(255, 255, 255, 0.85)', background: 'none', border: 'none', cursor: 'pointer' }}
+                  className="text-base font-bold transition-colors"
+                  style={{ color: '#FFFFFF', background: 'none', border: 'none', cursor: 'pointer' }}
                   onMouseEnter={(e) => e.target.style.color = '#C9A961'}
-                  onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.85)'}
+                  onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}
                   onClick={() => onNavigate('metrics')}
                 >
                   Metrics
                 </button>
-                
-                <div className="relative" onMouseEnter={() => setServicesDropdownOpen(true)} onMouseLeave={() => setServicesDropdownOpen(false)}>
-                  <button className="text-sm font-semibold transition-colors flex items-center gap-1" style={{ color: servicesDropdownOpen ? '#C9A961' : 'rgba(255, 255, 255, 0.85)' }}>
+
+                {/* Services Dropdown — 4 columns */}
+                <div className="relative group">
+                  <button className="text-base font-bold transition-colors flex items-center gap-1" style={{ color: '#FFFFFF', background: 'none', border: 'none', cursor: 'pointer' }}>
                     Services
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  
-                  {servicesDropdownOpen && (
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-2 w-[720px] max-w-[calc(100vw-2rem)]">
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-[760px] max-w-[calc(100vw-2rem)] hidden group-hover:block" style={{ paddingTop: '8px' }}>
                       <div className="rounded-lg shadow-2xl" style={{ backgroundColor: '#0A1628', border: '1px solid rgba(201, 169, 97, 0.2)' }}>
-                        <div className="grid grid-cols-3 gap-6 p-8">
-                        {/* Fractional Services */}
-                        <div>
-                          <h3 className="text-sm font-bold mb-4 pb-2 border-b" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Fractional Services</h3>
-                          <ul className="space-y-2">
-                            {[
-                              { label: 'Chief Operating Officer', id: 'fractional-coo' },
-                              { label: 'Chief Financial Officer', id: 'fractional-cfo' },
-                              { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' },
-                              { label: 'HR & Payroll', id: 'hr-payroll' },
-                              { label: 'Chief Information Officer', id: 'fractional-cio' },
-                              { label: 'Chief Marketing Officer', id: 'fractional-cmo' },
-                              { label: 'Chief AI Officer', id: 'fractional-caio' },
-                              { label: 'Tax Strategy', id: 'tax-strategy' },
-                            ].map(({ label, id }) => (
-                              <li key={id}>
-                                <button
-                                  onClick={() => { onNavigate(id); setServicesDropdownOpen(false); }}
-                                  className="text-xs block py-1 transition-colors text-left w-full"
-                                  style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}
-                                  onMouseEnter={(e) => (e.target.style.color = '#C9A961')}
-                                  onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.7)')}
-                                >
-                                  {label}
-                                </button>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        
-                        {/* Litigation Finance */}
-                        <div>
-                          <h3 className="text-sm font-bold mb-4 pb-2 border-b" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Litigation Finance</h3>
-                          <ul className="space-y-2">
-                            <li><a href="#services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Growth Marketing Loans</a></li>
-                            <li><a href="#services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Pre-Settlement Advance</a></li>
-                            <li><a href="#services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Case Cost Advance</a></li>
-                            <li><a href="#services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Medical Funding</a></li>
-                          </ul>
-                        </div>
-                        
-                        {/* Advisory */}
-                        <div>
-                          <h3 className="text-sm font-bold mb-4 pb-2 border-b" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Advisory</h3>
-                          <ul className="space-y-2">
-                            <li><a href="#services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Mergers & Acquisitions</a></li>
-                            <li><a href="#services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Management Services Organization</a></li>
-                            <li><a href="#services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Alternative Business Structure</a></li>
-                            <li><a href="#services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>AI Hub & Innovation Advisory</a></li>
-                          </ul>
+                        <div className="grid grid-cols-4 gap-6 p-8">
+                          {/* Pre-Litigation Services */}
+                          <div>
+                            <h3 className="text-xs font-bold mb-4 pb-2 border-b uppercase tracking-wider" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Pre-Litigation Services</h3>
+                            <ul className="space-y-2">
+                              <li><button style={{ color: "rgba(255,255,255,0.7)", background: "none", border: "none", cursor: "pointer" }} className="text-xs block py-1 transition-colors text-left w-full" onMouseEnter={(e) => e.target.style.color = "#C9A961"} onMouseLeave={(e) => e.target.style.color = "rgba(255,255,255,0.7)"} onClick={() => { document.getElementById("lawfirm-in-a-box")?.scrollIntoView({ behavior: "smooth" }); setServicesDropdownOpen(false); }}>End to End</button></li>
+                              <li><button style={{ color: "rgba(255,255,255,0.7)", background: "none", border: "none", cursor: "pointer" }} className="text-xs block py-1 transition-colors text-left w-full" onMouseEnter={(e) => e.target.style.color = "#C9A961"} onMouseLeave={(e) => e.target.style.color = "rgba(255,255,255,0.7)"} onClick={() => { onNavigate("policy-limits"); setServicesDropdownOpen(false); }}>Policy Limits</button></li>
+                              <li><button style={{ color: "rgba(255,255,255,0.7)", background: "none", border: "none", cursor: "pointer" }} className="text-xs block py-1 transition-colors text-left w-full" onMouseEnter={(e) => e.target.style.color = "#C9A961"} onMouseLeave={(e) => e.target.style.color = "rgba(255,255,255,0.7)"} onClick={() => { onNavigate("lien-resolution"); setServicesDropdownOpen(false); }}>Lien Resolution</button></li>
+                              <li><button style={{ color: "rgba(255,255,255,0.7)", background: "none", border: "none", cursor: "pointer" }} className="text-xs block py-1 transition-colors text-left w-full" onMouseEnter={(e) => e.target.style.color = "#C9A961"} onMouseLeave={(e) => e.target.style.color = "rgba(255,255,255,0.7)"} onClick={() => { onNavigate("settlement-disbursement"); setServicesDropdownOpen(false); }}>Settlement Disbursements</button></li>
+                            </ul>
+                          </div>
+                          {/* Additional Support Services */}
+                          <div>
+                            <h3 className="text-xs font-bold mb-4 pb-2 border-b uppercase tracking-wider" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Additional Support Services</h3>
+                            <ul className="space-y-2">
+                              {[
+                                { label: 'Chief Operating Officer', id: 'fractional-coo' },
+                                { label: 'Chief Financial Officer', id: 'fractional-cfo' },
+                                { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' },
+                                { label: 'HR & Payroll', id: 'hr-payroll' },
+                                { label: 'Chief Information Officer', id: 'fractional-cio' },
+                                { label: 'Chief Marketing Officer', id: 'fractional-cmo' },
+                                { label: 'Chief AI Officer', id: 'fractional-caio' },
+                                { label: 'Tax Strategy', id: 'tax-strategy' },
+                              ].map(({ label, id }) => (
+                                <li key={id}>
+                                  <button onClick={() => { onNavigate(id); setServicesDropdownOpen(false); }} className="text-xs block py-1 transition-colors text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => (e.target.style.color = '#C9A961')} onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.7)')}>{label}</button>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          {/* Litigation Finance */}
+                          <div>
+                            <h3 className="text-xs font-bold mb-4 pb-2 border-b uppercase tracking-wider" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Litigation Finance</h3>
+                            <ul className="space-y-2">
+                              {['Growth Marketing Loans', 'Pre-Settlement Advance', 'Case Cost Advance', 'Medical Funding'].map((label) => (
+                                <li key={label}><a href="#support-services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'} onClick={() => setServicesDropdownOpen(false)}>{label}</a></li>
+                              ))}
+                            </ul>
+                          </div>
+                          {/* Advisory */}
+                          <div>
+                            <h3 className="text-xs font-bold mb-4 pb-2 border-b uppercase tracking-wider" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Advisory</h3>
+                            <ul className="space-y-2">
+                              {['Mergers & Acquisitions', 'Management Services Organization', 'Alternative Business Structure', 'AI Hub & Innovation Advisory'].map((label) => (
+                                <li key={label}><a href="#support-services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'} onClick={() => setServicesDropdownOpen(false)}>{label}</a></li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
                       </div>
-                      </div>
-                    </div>
-                  )}
+                  </div>
                 </div>
-                
-                <a href="#team" className="text-sm font-semibold transition-colors" style={{ color: 'rgba(255, 255, 255, 0.85)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.85)'}>About</a>
+
               </div>
-              
+
               {/* Mobile menu button */}
               <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -216,10 +254,9 @@ export default function Home({ onNavigateContact, onNavigate }) {
                   )}
                 </svg>
               </button>
-              
-              <Button className="hidden md:block text-white text-sm md:text-base font-bold shadow-lg hover:shadow-xl transition-all px-5 py-2.5" style={{ backgroundColor: '#C9A961' }} onMouseEnter={(e) => e.target.style.backgroundColor = '#B8941F'} onMouseLeave={(e) => e.target.style.backgroundColor = '#C9A961'} onClick={onNavigateContact}>
-                Schedule a Call
-              </Button>
+
+              {/* Right: placeholder to keep nav balanced */}
+              <div className="hidden md:block w-24" />
             </div>
           </div>
           
@@ -227,345 +264,563 @@ export default function Home({ onNavigateContact, onNavigate }) {
           {mobileMenuOpen && (
             <div className="md:hidden max-h-[70vh] overflow-y-auto animate-slide-down" style={{ backgroundColor: '#0A1628' }}>
               <div className="px-4 pt-2 pb-4 space-y-4">
-                <a href="#how-it-works" className="block py-2 text-sm font-semibold" style={{ color: 'rgba(255, 255, 255, 0.85)' }} onClick={() => setMobileMenuOpen(false)}>How it Works</a>
-                <a href="#lawfirm-in-a-box" className="block py-2 text-sm font-semibold" style={{ color: 'rgba(255, 255, 255, 0.85)' }} onClick={() => setMobileMenuOpen(false)}>LawFirm In A Box</a>
+                <a href="#how-it-works" className="block py-2 text-base font-bold" style={{ color: '#FFFFFF' }} onClick={() => setMobileMenuOpen(false)}>How We Work</a>
+                <a href="#lawfirm-in-a-box" className="block py-2 text-base font-bold" style={{ color: '#FFFFFF' }} onClick={() => setMobileMenuOpen(false)}>LawFirm In A Box</a>
                 <button
-                  className="block py-2 text-sm font-semibold w-full text-left"
-                  style={{ color: 'rgba(255, 255, 255, 0.85)', background: 'none', border: 'none', cursor: 'pointer' }}
+                  className="block py-2 text-base font-bold w-full text-left"
+                  style={{ color: '#FFFFFF', background: 'none', border: 'none', cursor: 'pointer' }}
                   onClick={() => { onNavigate('metrics'); setMobileMenuOpen(false); }}
                 >
                   Metrics
                 </button>
                 
-                {/* Services Section */}
+                {/* Services */}
                 <div>
                   <div className="py-2 text-sm font-semibold" style={{ color: '#C9A961' }}>Services</div>
-                  
                   <div className="ml-4 mt-2 space-y-3">
-                    {/* Fractional Services */}
                     <div>
-                      <h4 className="text-xs font-bold mb-1" style={{ color: '#C9A961' }}>Fractional Services</h4>
+                      <h4 className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.7)' }}>Pre-Litigation Services</h4>
                       <ul className="space-y-1">
-                        {[
-                          { label: 'Chief Operating Officer', id: 'fractional-coo' },
-                          { label: 'Chief Financial Officer', id: 'fractional-cfo' },
-                          { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' },
-                          { label: 'HR & Payroll', id: 'hr-payroll' },
-                          { label: 'Chief Information Officer', id: 'fractional-cio' },
-                          { label: 'Chief Marketing Officer', id: 'fractional-cmo' },
-                          { label: 'Chief AI Officer', id: 'fractional-caio' },
-                          { label: 'Tax Strategy', id: 'tax-strategy' },
-                        ].map(({ label, id }) => (
-                          <li key={id}>
-                            <button
-                              onClick={() => { onNavigate(id); setMobileMenuOpen(false); }}
-                              className="block py-0.5 text-xs text-left w-full"
-                              style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}
-                            >
-                              {label}
-                            </button>
-                          </li>
+                        <li><button style={{ color: "rgba(255,255,255,0.7)", background: "none", border: "none", cursor: "pointer" }} className="block py-0.5 text-xs text-left w-full" onClick={() => { document.getElementById("lawfirm-in-a-box")?.scrollIntoView({ behavior: "smooth" }); setMobileMenuOpen(false); }}>End to End</button></li>
+                        <li><button style={{ color: "rgba(255,255,255,0.7)", background: "none", border: "none", cursor: "pointer" }} className="block py-0.5 text-xs text-left w-full" onClick={() => { onNavigate("policy-limits"); setMobileMenuOpen(false); }}>Policy Limits</button></li>
+                        <li><button style={{ color: "rgba(255,255,255,0.7)", background: "none", border: "none", cursor: "pointer" }} className="block py-0.5 text-xs text-left w-full" onClick={() => { onNavigate("lien-resolution"); setMobileMenuOpen(false); }}>Lien Resolution</button></li>
+                        <li><button style={{ color: "rgba(255,255,255,0.7)", background: "none", border: "none", cursor: "pointer" }} className="block py-0.5 text-xs text-left w-full" onClick={() => { onNavigate("settlement-disbursement"); setMobileMenuOpen(false); }}>Settlement Disbursements</button></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.7)' }}>Additional Support Services</h4>
+                      <ul className="space-y-1">
+                        {[{ label: 'Chief Operating Officer', id: 'fractional-coo' }, { label: 'Chief Financial Officer', id: 'fractional-cfo' }, { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' }, { label: 'HR & Payroll', id: 'hr-payroll' }, { label: 'Chief Information Officer', id: 'fractional-cio' }, { label: 'Chief Marketing Officer', id: 'fractional-cmo' }, { label: 'Chief AI Officer', id: 'fractional-caio' }, { label: 'Tax Strategy', id: 'tax-strategy' }].map(({ label, id }) => (
+                          <li key={id}><button onClick={() => { onNavigate(id); setMobileMenuOpen(false); }} className="block py-0.5 text-xs text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}>{label}</button></li>
                         ))}
                       </ul>
                     </div>
-                    
-                    {/* Litigation Finance */}
                     <div>
-                      <h4 className="text-xs font-bold mb-1" style={{ color: '#C9A961' }}>Litigation Finance</h4>
+                      <h4 className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.7)' }}>Litigation Finance</h4>
                       <ul className="space-y-1">
-                        <li><a href="#services" className="block py-0.5 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onClick={() => setMobileMenuOpen(false)}>Growth Marketing Loans</a></li>
-                        <li><a href="#services" className="block py-0.5 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onClick={() => setMobileMenuOpen(false)}>Pre-Settlement • Case Cost</a></li>
-                        <li><a href="#services" className="block py-0.5 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onClick={() => setMobileMenuOpen(false)}>Medical Funding</a></li>
+                        {['Growth Marketing Loans', 'Pre-Settlement Advance', 'Case Cost Advance', 'Medical Funding'].map((label) => (
+                          <li key={label}><a href="#support-services" className="block py-0.5 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onClick={() => setMobileMenuOpen(false)}>{label}</a></li>
+                        ))}
                       </ul>
                     </div>
-                    
-                    {/* Advisory */}
                     <div>
-                      <h4 className="text-xs font-bold mb-1" style={{ color: '#C9A961' }}>Advisory</h4>
+                      <h4 className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.7)' }}>Advisory</h4>
                       <ul className="space-y-1">
-                        <li><a href="#services" className="block py-0.5 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onClick={() => setMobileMenuOpen(false)}>M&A • MSO • ABS</a></li>
-                        <li><a href="#services" className="block py-0.5 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onClick={() => setMobileMenuOpen(false)}>AI Hub & Innovation</a></li>
+                        {['Mergers & Acquisitions', 'Management Services Organization', 'Alternative Business Structure', 'AI Hub & Innovation Advisory'].map((label) => (
+                          <li key={label}><a href="#support-services" className="block py-0.5 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onClick={() => setMobileMenuOpen(false)}>{label}</a></li>
+                        ))}
                       </ul>
                     </div>
                   </div>
                 </div>
                 
-                <a href="#team" className="block py-2 text-sm font-semibold" style={{ color: 'rgba(255, 255, 255, 0.85)' }} onClick={() => setMobileMenuOpen(false)}>About</a>
+                <a href="#team" className="block py-2 text-base font-bold" style={{ color: '#FFFFFF' }} onClick={() => setMobileMenuOpen(false)}>About</a>
               </div>
             </div>
           )}
         </nav>
         
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10 pt-12 sm:pt-16 md:pt-24">
-          <div className="max-w-5xl mx-auto text-center">
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal mb-8 sm:mb-10 md:mb-12 mt-8 sm:mt-10 leading-tight" style={{ color: '#FFFFFF', letterSpacing: '-0.02em' }}>
-              Human Centric + AI =<br />More Cases, Less Overhead
-            </h1>
-            
-            <p className="text-lg sm:text-xl md:text-2xl mb-10 sm:mb-12 leading-relaxed max-w-3xl mx-auto font-light" style={{ color: 'rgba(255, 255, 255, 0.95)' }}>
-              LawBOX is the nation's Gold Standard for AI powered end to end pre-litigation. Effortlessly remove friction from Intake to Settlement, handle more cases with less overhead.
-            </p>
-            
-            <div className="flex justify-center">
-              <Button className="text-base sm:text-lg px-8 py-3.5 font-semibold rounded-lg transition-all hover:scale-105" style={{ backgroundColor: '#FFFFFF', color: '#0A1628' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#F5F5F5'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }} onClick={onNavigateContact}>
-                Schedule a Call
-              </Button>
-            </div>
-          
+        {/* Mobile: image only */}
+        <div className="relative md:hidden z-10">
+          <img src="/images/hero-office.jpg.png" alt="" className="w-full block" />
+        </div>
+
+        {/* Mobile: PIAAS + MSOAAS white bar */}
+        <div className="md:hidden z-10 bg-white px-4 pt-14 pb-2 flex items-center justify-center gap-3">
+          <div className="flex flex-col items-center">
+            <span className="font-serif font-bold" style={{ color: '#000000', fontSize: '0.85rem', letterSpacing: '-0.01em' }}>
+              PIAAS<sup style={{ fontSize: '0.4em', verticalAlign: 'super' }}>™</sup>
+            </span>
+            <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.45rem', fontWeight: 700, letterSpacing: '0.1em' }}>PI as a Service</p>
           </div>
+          <span style={{ color: '#C9A961', fontWeight: 900, fontSize: '0.85rem' }}>+</span>
+          <div className="flex flex-col items-center">
+            <span className="font-serif font-bold" style={{ color: '#000000', fontSize: '0.85rem', letterSpacing: '-0.01em' }}>
+              MSOAAS<sup style={{ fontSize: '0.4em', verticalAlign: 'super' }}>™</sup>
+            </span>
+            <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.45rem', fontWeight: 700, letterSpacing: '0.1em' }}>MSO as a Service</p>
+          </div>
+        </div>
+
+        {/* Desktop: hero content */}
+        <div className="relative z-10 flex-1 hidden md:flex items-end justify-start pl-[23rem] pb-64">
+          <div>
+            <div className="flex flex-col mb-8 ml-8">
+              <div className="flex flex-col items-start">
+                <h1 className="font-serif leading-none" style={{ fontWeight: 700, color: '#000000', fontSize: 'clamp(1.2rem, 2.625vw, 2.25rem)', letterSpacing: '-0.02em' }}>
+                  PIAAS<sup style={{ fontSize: '0.35em', verticalAlign: 'super' }}>™</sup>
+                </h1>
+                <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em' }}>PI as a Service</p>
+              </div>
+              <span className="font-serif ml-24" style={{ color: '#C9A961', fontSize: 'clamp(1.05rem, 2.25vw, 1.875rem)', fontWeight: 900, lineHeight: 1 }}>+</span>
+              <div className="flex flex-col items-start">
+                <h1 className="font-serif leading-none" style={{ fontWeight: 700, color: '#000000', fontSize: 'clamp(1.2rem, 2.625vw, 2.25rem)', letterSpacing: '-0.02em' }}>
+                  MSOAAS<sup style={{ fontSize: '0.35em', verticalAlign: 'super' }}>™</sup>
+                </h1>
+                <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em' }}>MSO as a Service</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Logo above stats bar — desktop only */}
+        <div className="hidden md:block absolute right-6 z-30" style={{ bottom: 'calc(2.5rem + 50px)' }}>
+          <Logo variant="default" size="small" className="h-11 w-auto" />
+        </div>
+
+        {/* Stats bar — sits inside blur at bottom of hero */}
+        <div className="stats-bar-bg md:absolute md:bottom-0 md:left-0 md:right-0 z-20">
+          <div className="w-full px-4 md:px-5">
+            <div className="py-2 flex flex-col md:flex-row md:items-center md:ml-10 gap-1 md:gap-6">
+              <p className="md:hidden font-serif font-bold text-center" style={{ color: '#FFFFFF', fontSize: 'clamp(0.75rem, 1.5vw, 1.4rem)' }}>
+                AI Powered Pre-Lit Platform From Intake To Outcomes
+              </p>
+              <p className="hidden md:block font-serif font-bold whitespace-nowrap" style={{ color: '#000000', fontSize: 'clamp(0.75rem, 1.5vw, 1.4rem)' }}>
+                AI Powered End to End Pre-Lit Platform From Intake To Demand &amp; Outcomes
+              </p>
+              <div className="hidden md:block" style={{ width: '1px', alignSelf: 'stretch', backgroundColor: 'rgba(0,0,0,0.4)' }} />
+              <p className="hidden md:block font-serif font-bold whitespace-nowrap" style={{ color: '#000000', fontSize: 'clamp(0.75rem, 1.5vw, 1.4rem)' }}>
+                Scale Your Practice &nbsp;&nbsp;·&nbsp;&nbsp; Reduce Overhead &nbsp;&nbsp;·&nbsp;&nbsp; Reduce Time On Desk(TOD)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile: Scale your practice bar */}
+        <div className="md:hidden z-20 py-2 px-4 flex justify-center" style={{ backgroundColor: '#FFFFFF' }}>
+          <p className="font-serif font-bold text-center" style={{ color: '#000000', fontSize: 'clamp(0.75rem, 1.5vw, 1.4rem)' }}>
+            Reduce Overhead &nbsp;·&nbsp; Scale Your Practice &nbsp;·&nbsp; Reduce Time On Desk
+          </p>
+        </div>
+
+      </section>
+
+      {/* Human Centric + AI Section */}
+      <section className="py-20 md:py-32 text-center px-6 md:px-8" style={{ backgroundColor: '#0F1E35' }}>
+        <div className="max-w-4xl mx-auto flex flex-col items-center" style={{ minHeight: '680px' }}>
+          <h2 className="font-serif font-bold text-white mb-8 leading-tight" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.2rem)' }}>
+            Agents + Humans + AI<br />=<br />
+            <span className="inline-flex flex-wrap justify-center gap-x-3 gap-y-4 mt-2">
+              <span style={{ border: '2px solid #FFFFFF', padding: '0.2rem 0.8rem' }}>More Cases</span>
+              <span style={{ border: '2px solid #FFFFFF', padding: '0.2rem 0.8rem' }}><span style={{ color: '#FF0000' }}>Less</span> Overhead</span>
+              <span style={{ border: '2px solid #FFFFFF', padding: '0.2rem 0.8rem' }}><span style={{ color: '#FF0000' }}>Less</span> Time On Desk</span>
+              <span style={{ border: '2px solid #FFFFFF', padding: '0.2rem 0.8rem' }}><span style={{ color: '#FF0000' }}>Less</span> Staff</span>
+              <span style={{ border: '2px solid #FFFFFF', padding: '0.2rem 0.8rem' }}>Superior Client Comm</span>
+            </span>
+          </h2>
+          <p className="text-base md:text-xl leading-relaxed mx-auto mt-16" style={{ color: '#FFFFFF', maxWidth: '680px' }}>
+            LawBOX™ is the nation's Gold Standard for AI powered end to end pre-litigation. Effortlessly remove friction from Intake to Settlement, handle more cases with less overhead.
+          </p>
+          <button
+            onClick={onNavigateContact}
+            className="font-bold px-8 py-3 rounded-md transition-all mt-auto"
+            style={{ backgroundColor: '#FFFFFF', color: '#0F1E35', fontSize: '1rem', border: 'none', cursor: 'pointer' }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#C9A961'; e.currentTarget.style.color = '#FFFFFF'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; e.currentTarget.style.color = '#0F1E35'; }}
+          >
+            Schedule a Call
+          </button>
         </div>
       </section>
 
-      {/* Main Value Prop - Asymmetric layout with real photography */}
-      <section ref={valuePropRef} className={`py-16 ${valuePropVisible ? 'animate-fade-in-down' : 'opacity-0'}`} style={{ backgroundColor: '#FAFAF8' }} id="how-it-works">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-md text-xs sm:text-sm font-bold mb-6" style={{ backgroundColor: '#C9A961', color: 'white' }}>
-              <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ backgroundColor: 'white' }}></span>
-              Trusted by top personal injury firms nationwide
-            </div>
-          </div>
-          
-          <div className="max-w-4xl mx-auto space-y-12">
-            {/* How it Works Content */}
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white mb-6" style={{ backgroundColor: '#C9A961' }}>
-                How it Works
+      {/* Trusted By / Logo Ticker */}
+      <section className="py-10 overflow-hidden" style={{ backgroundColor: '#F5F5F5', borderTop: '1px solid #E5E7EB', borderBottom: '1px solid #E5E7EB' }}>
+        <p className="text-center font-bold mb-6" style={{ color: '#9E9E9E' }}>
+          <span className="text-xs uppercase tracking-widest">Trusted By Leading Law Firms</span>
+          <span className="font-normal" style={{ fontSize: '0.65rem', letterSpacing: '0', textTransform: 'none' }}> (LawBOX and Fort Morgan)</span>
+        </p>
+        <div style={{ overflow: 'hidden', position: 'relative' }}>
+          <div className="marquee-track">
+            {[
+              { src: '/images/Philipslogo.webp', alt: 'Phillips Law Group' },
+              { src: '/images/EastonandEastonlogo.png', alt: 'Easton & Easton' },
+              { src: '/images/californialegalcounsellogo.jpg', alt: 'California Legal Counsel' },
+              { src: '/images/SFloogo.png', alt: 'SF Law' },
+              { src: '/images/calhounlogo.jpg', alt: 'Calhoun' },
+              { src: '/images/bougardlogo.jpg', alt: 'Bougard' },
+              { src: '/images/yankologo.png', alt: 'Yanko' },
+              { src: '/images/puschlogo.png', alt: 'Pusch', scale: 1.8 },
+              { src: '/images/zavalalogo.jpg', alt: 'Zavala' },
+              { src: '/images/Philipslogo.webp', alt: 'Phillips Law Group' },
+              { src: '/images/EastonandEastonlogo.png', alt: 'Easton & Easton' },
+              { src: '/images/californialegalcounsellogo.jpg', alt: 'California Legal Counsel' },
+              { src: '/images/SFloogo.png', alt: 'SF Law' },
+              { src: '/images/calhounlogo.jpg', alt: 'Calhoun' },
+              { src: '/images/bougardlogo.jpg', alt: 'Bougard' },
+              { src: '/images/yankologo.png', alt: 'Yanko' },
+              { src: '/images/puschlogo.png', alt: 'Pusch', scale: 1.8 },
+              { src: '/images/zavalalogo.jpg', alt: 'Zavala' },
+            ].map((logo, i) => (
+              <div key={i} className="marquee-item flex items-center justify-center flex-shrink-0">
+                <img src={logo.src} alt={logo.alt} className="marquee-logo" style={{ height: logo.scale ? `${44 * logo.scale}px` : undefined }} />
               </div>
-              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6" style={{ color: '#0A1628' }}>
-                AI powered humans in the loop operations team handles your <span style={{ color: '#C9A961' }}>cases from intake to demand</span>
-              </h2>
-              <p className="text-lg mb-8 leading-relaxed font-light max-w-3xl mx-auto" style={{ color: '#2B3544' }}>
-                From the moment a lead comes in to final settlement, LawBOX manages every case for one flat fee. No more hiring, training, or managing case staff.
-              </p>
-              <div className="flex justify-center">
-                <Button className="text-white font-bold shadow-lg px-6 py-3" style={{ backgroundColor: '#C9A961', boxShadow: '0 10px 25px rgba(201, 169, 97, 0.2)' }} onMouseEnter={(e) => e.target.style.backgroundColor = '#B8941F'} onMouseLeave={(e) => e.target.style.backgroundColor = '#C9A961'} onClick={onNavigateContact}>
-                  Schedule a Call
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-            
-            {/* Client testimonial */}
-            <div className="text-center p-8">
-              <svg className="w-12 h-12 mb-6 opacity-20 mx-auto" fill="currentColor" viewBox="0 0 24 24" style={{ color: '#C9A961' }}>
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <p className="text-2xl md:text-3xl italic mb-6 leading-relaxed font-light max-w-3xl mx-auto" style={{ color: '#0A1628' }}>LawBOX reduced our case prep time by 60% while increasing our settlement values. It's like having a dedicated ops team without the overhead.</p>
-              <p className="text-sm font-bold" style={{ color: '#C9A961' }}>— Sarah Chen, Managing Partner, Chen & Associates</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* LawFirm In A Box Section */}
-      <section className="py-16 overflow-hidden" style={{ backgroundColor: '#1A2740' }} id="lawfirm-in-a-box">
+      <section className="pt-6 pb-16 overflow-hidden relative" style={{ backgroundColor: '#FFFFFF' }} id="lawfirm-in-a-box">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Bottom-left subtitle */}
+          <div className="absolute bottom-0 left-6">
+            <p className="text-xl font-bold" style={{ color: '#000000' }}>Law Firm In A Box™</p>
+          </div>
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">Hyperscale Your Firm</h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-white">LawBOX - Law Firm In A Box™</p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3" style={{ color: '#000000' }}>Hyperscale Your Firm with AI</h2>
+            <p className="font-semibold mt-4" style={{ color: '#C9A961', fontSize: 'clamp(0.9rem, 1.5vw, 1.2rem)' }}>From Growth Funding To Settlement Disbursements</p>
           </div>
 
           {/* Flow Diagram */}
-          <div className="pb-4">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-3 sm:gap-4 md:gap-3 lg:gap-6">
+          <div className="pb-4 md:-ml-40">
+            <div className="flex flex-col md:flex-row md:items-center gap-2">
+
+              {/* helper: small box */}
               {/* Marketing Growth Capital */}
-              <div className="w-full max-w-xs md:w-28 lg:w-36">
-                <div className="border-2 rounded-lg p-4 md:p-3 lg:p-5 h-full flex flex-col items-center justify-center text-center" style={{ borderColor: '#C9A961', backgroundColor: 'transparent' }}>
-                  <svg className="w-10 h-10 md:w-8 md:h-8 lg:w-10 lg:h-10 mb-3 md:mb-2 lg:mb-3" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <h3 className="font-bold text-white text-sm md:text-xs lg:text-sm mb-2">Marketing Growth Capital</h3>
-                  <p className="text-xs md:text-[0.65rem] lg:text-xs" style={{ color: '#C9A961' }}>Litigation Finance</p>
-                </div>
+              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px' }}>
+                <svg className="w-8 h-8 mb-2 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="font-bold text-sm leading-tight mb-1" style={{ color: '#000000' }}>Marketing Growth Capital Fund</p>
+                <p className="text-xs font-bold" style={{ color: '#B8860B' }}>Growth Funding</p>
               </div>
 
               {/* Arrow */}
-              <svg className="w-8 h-8 rotate-90 md:rotate-0 md:w-6 md:h-6 lg:w-8 lg:h-8 flex-shrink-0" fill="#C9A961" viewBox="0 0 24 24">
-                <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
-              </svg>
+              <div className="flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 hidden md:block" fill="#C9A961" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
+                <svg className="w-5 h-5 md:hidden" fill="#C9A961" viewBox="0 0 24 24"><path d="M11 13.025l-2.828-2.847-2.828 2.847L1 13.025 12 24l11-10.975-4.344-.847-2.828-2.847L13 13.025h-2z" /><path d="M11 0h2v13h-2z"/></svg>
+              </div>
 
               {/* Lead Gen */}
-              <div className="w-full max-w-xs md:w-28 lg:w-36">
-                <div className="border-2 rounded-lg p-4 md:p-3 lg:p-5 h-full flex flex-col items-center justify-center text-center" style={{ borderColor: '#C9A961', backgroundColor: 'transparent' }}>
-                  <svg className="w-10 h-10 md:w-8 md:h-8 lg:w-10 lg:h-10 mb-3 md:mb-2 lg:mb-3" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-                  </svg>
-                  <h3 className="font-bold text-white text-sm md:text-xs lg:text-sm mb-2">Lead Gen</h3>
-                  <p className="text-xs md:text-[0.65rem] lg:text-xs" style={{ color: '#C9A961' }}>Marketing Partners</p>
-                  <p className="text-xs md:text-[0.65rem] lg:text-xs" style={{ color: '#C9A961' }}>Plaintiff Acquisition</p>
-                </div>
+              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px' }}>
+                <svg className="w-8 h-8 mb-2 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                </svg>
+                <p className="font-bold text-sm leading-tight mb-1" style={{ color: '#000000' }}>Vetted Marketing Partners</p>
+                <p className="text-xs font-bold" style={{ color: '#B8860B' }}>Marketing Partners</p>
               </div>
 
               {/* Arrow */}
-              <svg className="w-8 h-8 rotate-90 md:rotate-0 md:w-6 md:h-6 lg:w-8 lg:h-8 flex-shrink-0" fill="#C9A961" viewBox="0 0 24 24">
-                <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
-              </svg>
+              <div className="flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 hidden md:block" fill="#C9A961" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
+                <svg className="w-5 h-5 md:hidden" fill="#C9A961" viewBox="0 0 24 24"><path d="M11 13.025l-2.828-2.847-2.828 2.847L1 13.025 12 24l11-10.975-4.344-.847-2.828-2.847L13 13.025h-2z" /><path d="M11 0h2v13h-2z"/></svg>
+              </div>
 
               {/* Signed Retainer */}
-              <div className="w-full max-w-xs md:w-32 lg:w-36">
-                <div className="border-2 rounded-lg p-4 md:p-4 lg:p-5 h-full flex flex-col items-center justify-center text-center" style={{ borderColor: '#C9A961', backgroundColor: 'transparent' }}>
-                  <svg className="w-10 h-10 md:w-10 md:h-10 mb-3 md:mb-3" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px' }}>
+                <svg className="w-8 h-8 mb-2 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <p className="font-bold text-sm leading-tight mb-1" style={{ color: '#000000' }}>Signed Retainer</p>
+                <p className="text-xs font-bold" style={{ color: '#B8860B' }}>Client Onboarding</p>
+                <p className="text-xs font-bold" style={{ color: '#B8860B' }}>Intake Complete</p>
+              </div>
+
+              {/* Arrow */}
+              <div className="flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 hidden md:block" fill="#C9A961" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
+                <svg className="w-5 h-5 md:hidden" fill="#C9A961" viewBox="0 0 24 24"><path d="M11 13.025l-2.828-2.847-2.828 2.847L1 13.025 12 24l11-10.975-4.344-.847-2.828-2.847L13 13.025h-2z" /><path d="M11 0h2v13h-2z"/></svg>
+              </div>
+
+              {/* Policy Limits */}
+              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px' }}>
+                <svg className="w-8 h-8 mb-2 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <p className="font-bold text-sm leading-tight mb-1" style={{ color: '#000000' }}>Policy Limits</p>
+                <p className="text-xs font-bold" style={{ color: '#B8860B' }}>Know coverage before you file maximum value</p>
+              </div>
+
+              {/* Arrow */}
+              <div className="flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 hidden md:block" fill="#C9A961" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
+                <svg className="w-5 h-5 md:hidden" fill="#C9A961" viewBox="0 0 24 24"><path d="M11 13.025l-2.828-2.847-2.828 2.847L1 13.025 12 24l11-10.975-4.344-.847-2.828-2.847L13 13.025h-2z" /><path d="M11 0h2v13h-2z"/></svg>
+              </div>
+
+              {/* LawBOX - Center Hero Box */}
+              <div className="border-2 rounded-xl p-4 w-full md:flex-[3] min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'rgba(201, 169, 97, 0.1)', minHeight: '180px' }}>
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <svg className="w-7 h-7 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
-                  <h3 className="font-bold text-white text-sm md:text-sm mb-2 md:mb-1">Signed Retainer</h3>
-                  <p className="text-xs md:text-xs" style={{ color: '#C9A961' }}>Client Onboarding</p>
-                  <p className="text-xs md:text-xs" style={{ color: '#C9A961' }}>Intake Complete</p>
+                  <h3 className="font-bold text-lg" style={{ color: '#000000' }}>LawBOX™</h3>
+                </div>
+                <p className="text-center font-bold text-xs uppercase tracking-widest mb-3" style={{ color: '#C9A961' }}>Full Service Operations</p>
+                <div style={{ height: '1px', backgroundColor: 'rgba(201,169,97,0.3)', marginBottom: '12px' }} />
+                <div className="flex flex-col gap-2">
+                  {[
+                    'Demand Drafting',
+                    'Client Communictaion',
+                    'Records & Bills Retrieval',
+                    'Claims Setup & Investigation',
+                    'Care Coordination & Treatment',
+                    'Demand Drafting & Preparation',
+                    'Carrier Settlement Negotiation',
+                  ].map((item) => (
+                    <div key={item} className="text-center">
+                      <span style={{ fontSize: '0.8rem', color: '#000000' }}>{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* Arrow */}
-              <svg className="flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8" fill="#C9A961" viewBox="0 0 24 24">
-                <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
-              </svg>
-
-              {/* LawBOX - Center Large Box */}
-              <div className="w-full max-w-xl md:w-96 lg:w-[28rem]">
-                <div className="border-2 rounded-lg p-4 md:p-5 lg:p-6 h-full" style={{ borderColor: '#C9A961', backgroundColor: 'rgba(201, 169, 97, 0.1)' }}>
-                  <div className="flex items-center justify-center mb-3 md:mb-4">
-                    <svg className="w-8 h-8 md:w-10 md:h-10 mr-2" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                    <h3 className="font-bold text-white text-base md:text-lg lg:text-xl">LawBOX™</h3>
-                  </div>
-                  <p className="text-center font-bold mb-3 md:mb-4 text-xs md:text-sm" style={{ color: '#C9A961' }}>Full Service Operations</p>
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs md:text-sm text-white">
-                    <p>• Document Collection</p>
-                    <p>• Medical Records</p>
-                    <p>• Journey of Care</p>
-                    <p>• Treatment</p>
-                    <p>• Chronologies</p>
-                    <p>• Demand Writing</p>
-                    <p>• Case Management</p>
-                    <p>• AI + Expert Team</p>
-                  </div>
-                </div>
+              <div className="flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 hidden md:block" fill="#C9A961" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
+                <svg className="w-5 h-5 md:hidden" fill="#C9A961" viewBox="0 0 24 24"><path d="M11 13.025l-2.828-2.847-2.828 2.847L1 13.025 12 24l11-10.975-4.344-.847-2.828-2.847L13 13.025h-2z" /><path d="M11 0h2v13h-2z"/></svg>
               </div>
-
-              {/* Arrow */}
-              <svg className="flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8" fill="#C9A961" viewBox="0 0 24 24">
-                <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
-              </svg>
 
               {/* Demand Ready */}
-              <div className="w-full max-w-xs md:w-32 lg:w-36">
-                <div className="border-2 rounded-lg p-4 md:p-4 lg:p-5 h-full flex flex-col items-center justify-center text-center" style={{ borderColor: '#C9A961', backgroundColor: 'transparent' }}>
-                  <svg className="w-10 h-10 md:w-10 md:h-10 mb-3 md:mb-3" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <h3 className="font-bold text-white text-sm md:text-sm mb-2 md:mb-1">Demand Ready</h3>
-                  <p className="text-xs md:text-xs" style={{ color: '#C9A961' }}>Settlement Ready</p>
-                  <p className="text-xs md:text-xs" style={{ color: '#C9A961' }}>Cases Delivered</p>
-                </div>
+              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px' }}>
+                <svg className="w-8 h-8 mb-2 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="font-bold text-sm leading-tight mb-1" style={{ color: '#000000' }}>Demand Ready</p>
+                <p className="text-xs font-bold" style={{ color: '#B8860B' }}>Follow your firm's template</p>
               </div>
+
+              {/* Arrow */}
+              <div className="flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 hidden md:block" fill="#C9A961" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
+                <svg className="w-5 h-5 md:hidden" fill="#C9A961" viewBox="0 0 24 24"><path d="M11 13.025l-2.828-2.847-2.828 2.847L1 13.025 12 24l11-10.975-4.344-.847-2.828-2.847L13 13.025h-2z" /><path d="M11 0h2v13h-2z"/></svg>
+              </div>
+
+              {/* Lien Resolution */}
+              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px' }}>
+                <svg className="w-8 h-8 mb-2 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 14l2 2 4-4M7 4H4a1 1 0 00-1 1v14a1 1 0 001 1h16a1 1 0 001-1V5a1 1 0 00-1-1h-3M9 4h6a1 1 0 011 1v0a1 1 0 01-1 1H9a1 1 0 01-1-1v0a1 1 0 011-1z" />
+                </svg>
+                <p className="font-bold text-sm leading-tight mb-1" style={{ color: '#000000' }}>Lien Resolution</p>
+                <p className="text-xs font-bold" style={{ color: '#B8860B' }}>Reduce Liens maximize client recovery</p>
+
+              </div>
+
+              {/* Arrow */}
+              <div className="flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 hidden md:block" fill="#C9A961" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
+                <svg className="w-5 h-5 md:hidden" fill="#C9A961" viewBox="0 0 24 24"><path d="M11 13.025l-2.828-2.847-2.828 2.847L1 13.025 12 24l11-10.975-4.344-.847-2.828-2.847L13 13.025h-2z" /><path d="M11 0h2v13h-2z"/></svg>
+              </div>
+
+              {/* Settlement Disbursements */}
+              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px' }}>
+                <svg className="w-8 h-8 mb-2 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="font-bold text-sm leading-tight mb-1" style={{ color: '#000000' }}>Settlement Disbursements</p>
+                <p className="text-xs font-bold" style={{ color: '#B8860B' }}>Disburse settlements digitally and instantly</p>
+              </div>
+
             </div>
           </div>
 
-          {/* Bottom Summary */}
-          <div className="mt-12 text-center">
-            <p className="text-lg sm:text-xl md:text-2xl text-white mb-4">
-              <span className="font-bold">Capital</span> <span style={{ color: '#C9A961' }}>→</span> <span className="font-bold">Lead Gen</span> <span style={{ color: '#C9A961' }}>→</span> <span className="font-bold">Signed Retainer</span> <span style={{ color: '#C9A961' }}>→</span> <span className="font-bold">Demand Ready</span>
-            </p>
-            <p className="text-base sm:text-lg md:text-xl text-white font-semibold">Eliminate Friction, Maximize Output.</p>
+          {/* Bottom text */}
+          <div className="md:absolute md:bottom-2 md:right-6 flex flex-col gap-1 mt-6 md:mt-0 items-end">
+            <div className="flex items-center gap-2">
+              <p className="font-medium px-3 py-1 text-center" style={{ color: '#FF0000', fontSize: 'clamp(0.85rem, 2vw, 1.5rem)', letterSpacing: '0.01em', border: '2px solid #C9A961' }}>Reduce Overhead</p>
+              <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="#16a34a" strokeWidth="3" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <div className="flex items-center gap-2">
+              <p className="font-medium px-3 py-1 text-center" style={{ color: '#FF0000', fontSize: 'clamp(0.85rem, 2vw, 1.5rem)', letterSpacing: '0.01em', border: '2px solid #C9A961' }}>Reduce Time On Desk</p>
+              <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="#16a34a" strokeWidth="3" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Additional Benefits Section */}
+      <section className="py-20 px-6 md:px-8" style={{ backgroundColor: '#0F1E35' }}>
+        <div className="max-w-5xl mx-auto">
+          {/* Header */}
+          <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: '#C9A961' }}>Pre-Litigation Operating Layer</p>
+          <h2 className="font-serif font-bold text-white mb-12" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}>Additional Benefits</h2>
+
+          {/* Stats Bar */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px mb-12 md:mb-16" style={{ border: '1px solid rgba(201,169,97,0.3)', borderRadius: '4px', overflow: 'hidden' }}>
+            {[
+              { value: '500', label: 'Cases / CM Target' },
+              { value: 'Same-Day', label: 'Case Setup' },
+              { value: '1 MSA', label: 'One Accountable Partner' },
+              { value: '100%', label: 'Inside Your CMS' },
+            ].map((stat, i) => (
+              <div key={i} className="flex flex-col items-start px-4 md:px-6 py-4 md:py-5" style={{ backgroundColor: 'rgba(255,255,255,0.04)', borderRight: (i % 2 === 0) ? '1px solid rgba(201,169,97,0.2)' : 'none' }}>
+                <span className="font-serif font-bold mb-1" style={{ color: '#C9A961', fontSize: 'clamp(1.4rem, 2.5vw, 2rem)' }}>{stat.value}</span>
+                <span className="uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.6rem', fontWeight: 700 }}>{stat.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Numbered Benefits */}
+          <div className="flex flex-col divide-y" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+            {[
+              {
+                n: '1',
+                title: 'Keep more cases in-house — with capital to scale.',
+                body: 'Stop referring out or declining smaller matters. Keep 100% of the fee instead of splitting with a referral attorney. Growth funding can pair with LawBOX™ operating capacity so signed retainers turn into scalable, serviced matters.',
+                color: '#C9A961',
+              },
+              {
+                n: '2',
+                title: 'Preserve more legal fees (where permitted).',
+                body: "Many firms elect to apply LawBOX™ service costs as case costs at disbursement, at the attorney's discretion. Availability depends on your state's rules and fee-agreement language. LawBOX™ can coordinate an opinion letter from qualified counsel to confirm what is permissible in your jurisdiction.",
+                color: '#0F1E35',
+              },
+              {
+                n: '3',
+                title: 'One agreement. One accountable partner.',
+                body: 'One MSA and SOW covers intake support, treatment monitoring, records and bills retrieval, demand drafting, and pre-lit operations. Replaces the cost and management burden of multiple out-of-office VAs. One line of escalation when something needs attention.',
+                color: '#C9A961',
+              },
+              {
+                n: '4',
+                title: 'No new tools to learn.',
+                body: "LawBOX™ works inside your firm's existing CMS, email, and matter workflow. Zero setup friction. Zero staff retraining. Your team keeps working the way they already work.",
+                color: '#0F1E35',
+              },
+              {
+                n: '5',
+                title: 'Speed from day one.',
+                body: "Same-day case setup, daily follow-up, and faster demand readiness. Matters don't sit idle. Leverage is built before negotiation, not after.",
+                color: '#C9A961',
+              },
+            ].map((item) => (
+              <div key={item.n} className="flex gap-6 py-8">
+                <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center font-bold text-base" style={{ backgroundColor: item.color === '#C9A961' ? '#C9A961' : '#1E2F45', color: item.color === '#C9A961' ? '#0F1E35' : '#FFFFFF', borderRadius: '4px' }}>
+                  {item.n}
+                </div>
+                <div>
+                  <h3 className="font-serif font-bold text-white mb-2" style={{ fontSize: 'clamp(1rem, 1.8vw, 1.25rem)' }}>{item.title}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', lineHeight: 1.7 }}>{item.body}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Services Section - Detailed breakdown with new color scheme */}
-      <section ref={servicesRef} className={`py-20 bg-white texture-overlay ${servicesVisible ? 'animate-fade-in-down' : 'opacity-0'}`} id="services">
+      {false && <>
+      {/* Services Section */}
+      <section ref={servicesRef} className={`py-24 ${servicesVisible ? 'animate-fade-in-down' : 'opacity-0'}`} style={{ backgroundColor: '#FFFFFF' }} id="services">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-5xl md:text-6xl font-bold mb-6" style={{ color: '#0A1628' }}>Pre Litigation Services</h2>
-            <p className="text-xl max-w-3xl mx-auto font-light leading-relaxed" style={{ color: '#64748B' }}>Transform your operations with AI-powered teams & case managers that work around the clock</p>
+
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#C9A961' }}>Pre-Litigation Services</p>
+              <h2 className="font-serif text-4xl md:text-5xl font-bold leading-tight" style={{ color: '#0A1628' }}>Everything handled,<br />intake to demand</h2>
+            </div>
+            <p className="text-base font-light max-w-sm" style={{ color: '#64748B' }}>AI-powered teams & case managers working around the clock for your firm</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            {/* Intake Card */}
-            <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
-              <div className="p-8 lg:p-10">
-                <h3 className="text-2xl lg:text-3xl font-bold mb-2" style={{ color: '#0A1628' }}><span style={{ color: '#C9A961', WebkitTextStroke: '1px #C9A961' }}>Intake</span></h3>
-                <p className="text-sm mb-4 font-medium" style={{ color: '#888888' }}>That Captures Every Opportunity</p>
-                <p className="leading-relaxed" style={{ color: '#64748B' }}>
-                  AI monitors every intake call 24/7, identifies lost leads in real time, and alerts you to rescue them before they sign with another firm. Multilingual specialists qualify all leads.
-                </p>
-              </div>
-            </div>
-
-            {/* Document Collection Card */}
-            <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
-              <div className="p-8 lg:p-10">
-                <h3 className="text-2xl lg:text-3xl font-bold mb-4" style={{ color: '#0A1628' }}><span style={{ color: '#C9A961', WebkitTextStroke: '1px #C9A961' }}>Document Collection & Claims Setup</span></h3>
-                <p className="leading-relaxed" style={{ color: '#64748B' }}>
-                  Police reports, medical retrievals, insurance claims setup, and facts of loss—all handled seamlessly.
-                </p>
-              </div>
-            </div>
-
-            {/* Journey of Care Card - Full Width */}
-            <div className="md:col-span-2 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
-              <div className="p-8 lg:p-10">
-                <h3 className="text-2xl lg:text-3xl font-bold mb-4" style={{ color: '#0A1628' }}><span style={{ color: '#C9A961', WebkitTextStroke: '1px #C9A961' }}>Journey Of Care</span></h3>
-                <p className="leading-relaxed mb-6 text-lg" style={{ color: '#64748B' }}>
-                  Keep clients treating until maximum medical improvement. We check in weekly to ensure clients complete their treatment plan, because finished treatment means higher settlements.
-                </p>
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div className="flex gap-3">
-                    <CheckCircle2 className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#C9A961' }} />
-                    <div>
-                      <div className="font-semibold mb-1" style={{ color: '#0A1628' }}>90% Faster Retrieval</div>
-                      <div className="text-sm leading-relaxed" style={{ color: '#64748B' }}>No more spending hours hunting facilities</div>
-                    </div>
+          {/* Numbered service rows */}
+          <div className="space-y-0">
+            {[
+              {
+                num: '01',
+                title: 'Intake',
+                tag: 'Captures Every Opportunity',
+                body: 'AI monitors every intake call 24/7, identifies lost leads in real time, and alerts you to rescue them before they sign with another firm. Multilingual specialists qualify all leads.',
+                highlight: false,
+              },
+              {
+                num: '02',
+                title: 'Document Collection & Claims Setup',
+                tag: 'Fully Handled End-to-End',
+                body: 'Police reports, medical retrievals, insurance claims setup, and facts of loss — all collected and organized seamlessly so nothing falls through the cracks.',
+                highlight: false,
+              },
+              {
+                num: '03',
+                title: 'Journey Of Care',
+                tag: 'Higher Settlements Through Completion',
+                body: 'Weekly check-ins keep clients treating until maximum medical improvement. Finished treatment means stronger cases and higher settlements.',
+                highlight: true,
+                metrics: [
+                  { stat: '90%', label: 'Faster Record Retrieval' },
+                  { stat: 'Auto', label: 'Provider Identification' },
+                  { stat: '100%', label: 'Complete Bill & Note Package' },
+                ],
+              },
+              {
+                num: '04',
+                title: 'Medical Chronologies',
+                tag: 'Save 50+ Hours Per Case',
+                body: 'Hundreds of pages transformed into organized, searchable timelines with source citations — delivered in hours, not weeks. Process records 8× faster than manual review.',
+                highlight: false,
+              },
+              {
+                num: '05',
+                title: 'Demand Letters',
+                tag: 'Sounds Like Your Firm, Not a Robot',
+                body: 'Demands built to your exact specifications with adjuster psychology baked in. Delivered in 48 hours with unlimited revisions until it\'s perfect.',
+                highlight: false,
+              },
+            ].map(({ num, title, tag, body, highlight, metrics }, i) => (
+              <div
+                key={num}
+                className="group relative transition-all duration-300"
+                style={{
+                  borderTop: '1px solid #E5E7EB',
+                  backgroundColor: highlight ? '#0A1628' : 'transparent',
+                  padding: highlight ? '0' : '0',
+                }}
+              >
+                <div
+                  className="grid md:grid-cols-[80px_1fr_1.6fr] gap-6 md:gap-10 items-start py-10 px-0 md:px-2 cursor-default"
+                  style={{ paddingLeft: highlight ? '0' : undefined }}
+                  onMouseEnter={(e) => {
+                    if (!highlight) e.currentTarget.parentElement.style.backgroundColor = '#FAFAF8';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!highlight) e.currentTarget.parentElement.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  {/* Number */}
+                  <div className="font-serif text-4xl font-bold select-none" style={{ color: highlight ? 'rgba(201,169,97,0.3)' : '#C0C9D4', lineHeight: 1 }}>
+                    {num}
                   </div>
-                  <div className="flex gap-3">
-                    <CheckCircle2 className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#C9A961' }} />
-                    <div>
-                      <div className="font-semibold mb-1" style={{ color: '#0A1628' }}>Auto Provider ID</div>
-                      <div className="text-sm leading-relaxed" style={{ color: '#64748B' }}>We find where they were treated automatically</div>
-                    </div>
+
+                  {/* Title + tag */}
+                  <div className="pt-1">
+                    <h3 className="font-bold text-xl mb-2 leading-snug" style={{ color: highlight ? '#FFFFFF' : '#0A1628' }}>{title}</h3>
+                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: '#C9A961' }}>{tag}</span>
                   </div>
-                  <div className="flex gap-3">
-                    <CheckCircle2 className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#C9A961' }} />
-                    <div>
-                      <div className="font-semibold mb-1" style={{ color: '#0A1628' }}>Complete Package</div>
-                      <div className="text-sm leading-relaxed" style={{ color: '#64748B' }}>Bills, notes, imaging—organized & ready</div>
-                    </div>
+
+                  {/* Body + optional metrics */}
+                  <div className="pt-1">
+                    <p className="text-sm leading-relaxed mb-0" style={{ color: highlight ? 'rgba(255,255,255,0.8)' : '#374151' }}>{body}</p>
+                    {metrics && (
+                      <div className="grid grid-cols-3 gap-4 mt-8">
+                        {metrics.map(({ stat, label }) => (
+                          <div key={label}>
+                            <div className="text-2xl font-bold mb-1" style={{ color: '#C9A961' }}>{stat}</div>
+                            <div className="text-xs font-medium leading-snug" style={{ color: 'rgba(255,255,255,0.5)' }}>{label}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Medical Chronologies Card */}
-            <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
-              <div className="p-8 lg:p-10">
-                <h3 className="text-2xl lg:text-3xl font-bold mb-2" style={{ color: '#0A1628' }}><span style={{ color: '#C9A961', WebkitTextStroke: '1px #C9A961' }}>Medical Chronologies</span></h3>
-                <p className="text-sm mb-4 font-medium" style={{ color: '#888888' }}>That Save 50+ Hours Per Case</p>
-                <p className="leading-relaxed" style={{ color: '#64748B' }}>
-                  Hundreds of pages transformed into organized, searchable timelines with source citations, delivered in hours. Process records 8x faster than manual review.
-                </p>
+                {/* Gold left accent on hover (non-highlight rows) */}
+                {!highlight && (
+                  <div className="absolute left-0 top-0 bottom-0 w-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: '#C9A961' }} />
+                )}
               </div>
-            </div>
-
-            {/* Demand Letters Card */}
-            <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
-              <div className="p-8 lg:p-10">
-                <h3 className="text-2xl lg:text-3xl font-bold mb-2" style={{ color: '#0A1628' }}><span style={{ color: '#C9A961', WebkitTextStroke: '1px #C9A961' }}>Demand Letters</span></h3>
-                <p className="text-sm mb-4 font-medium" style={{ color: '#888888' }}>That Sound Like Your Firm, Not a Robot</p>
-                <p className="leading-relaxed" style={{ color: '#64748B' }}>
-                  Demands built to your specifications with adjuster psychology baked in. Sounds exactly like your firm, not a robot. Delivered in 48 hours with unlimited revisions.
-                </p>
-              </div>
-            </div>
+            ))}
+            {/* Bottom border */}
+            <div style={{ borderTop: '1px solid #E5E7EB' }} />
           </div>
         </div>
       </section>
 
       {/* From Lead to Settlement Section */}
-      <section ref={timelineRef} className={`py-16 ${timelineVisible ? 'animate-fade-in-down' : 'opacity-0'}`} style={{ backgroundColor: '#FAFAF8' }}>
+      <section ref={timelineRef} className={`py-24 ${timelineVisible ? 'animate-fade-in-down' : 'opacity-0'}`} style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <h2 className="font-serif text-5xl md:text-6xl font-bold mb-6" style={{ color: '#0A1628' }}>
+          <div className="mb-16">
+            <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: '#C9A961' }}>The Process</p>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold" style={{ color: '#0A1628' }}>
               From Lead to Settlement. <span style={{ color: '#C9A961' }}>Effortlessly.</span>
             </h2>
           </div>
@@ -739,41 +994,14 @@ export default function Home({ onNavigateContact, onNavigate }) {
         </div>
       </section>
 
-      {/* Social Proof Bar - Trusted Integrations */}
-      <section ref={socialProofRef} className={`py-20 border-y border-gray-200 ${socialProofVisible ? 'animate-fade-in-down' : 'opacity-0'}`} style={{ backgroundColor: '#FAFAF8' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-center mb-10 text-sm font-bold uppercase tracking-widest" style={{ color: '#64748B' }}>Trusted Integrations</p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            <div className="flex items-center justify-center">
-                <img src="/images/filevine.png" alt="Filevine" className="w-32 h-auto object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100" />
-            </div>
-            <div className="flex items-center justify-center">
-                <img src="/images/smokeball.png" alt="Smokeball" className="w-40 h-auto object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100" />
-            </div>
-            <div className="flex items-center justify-center">
-                <img src="/images/litify.png" alt="Litify" className="w-36 h-auto object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100" />
-            </div>
-            <div className="flex items-center justify-center">
-                <img src="/images/casepeer.png" alt="CASEpeer" className="w-36 h-auto object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100" />
-            </div>
-            <div className="flex items-center justify-center">
-                <img src="/images/mycase.png" alt="MyCase" className="w-36 h-auto object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100" />
-            </div>
-            <div className="flex items-center justify-center">
-                <img src="/images/clio.png" alt="Clio" className="w-28 h-auto object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100" />
-            </div>
-            </div>
-        </div>
-      </section>
-
       {/* Support Services Framework Section */}
       <section ref={frameworkRef} className={`py-24 ${frameworkVisible ? 'animate-fade-in-down' : 'opacity-0'}`} style={{ background: 'linear-gradient(to bottom, #FFFFFF, #FAFAF8)' }} id="support-services">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#0A1628' }}>
-              Support Services <span style={{ color: '#C9A961' }}>Framework</span>
+          <div className="mb-16">
+            <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: '#C9A961' }}>Additional Support Services</p>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold max-w-xl" style={{ color: '#0A1628' }}>
+              Everything your firm needs to scale
             </h2>
-            <p className="text-xl max-w-2xl mx-auto" style={{ color: '#64748B' }}>Everything your firm needs to scale. Nothing it doesn't.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
@@ -828,45 +1056,84 @@ export default function Home({ onNavigateContact, onNavigate }) {
             </div>
           </div>
 
-          <div className="text-center rounded-3xl p-12 relative overflow-hidden" style={{ backgroundColor: '#0A1628' }}>
-            <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
-              <div className="absolute bottom-10 right-10 w-40 h-40 rounded-full blur-3xl" style={{ backgroundColor: '#C9A961' }}></div>
-            </div>
-            <p className="text-3xl md:text-4xl font-bold text-white relative z-10">
-              World-class infrastructure <span style={{ color: '#C9A961' }}>Fractional cost</span>
-            </p>
-          </div>
         </div>
       </section>
+      </>}
 
-      <section ref={integrationRef} className={`py-24 ${integrationVisible ? 'animate-fade-in-down' : 'opacity-0'}`} style={{ background: 'linear-gradient(to bottom, #FFFFFF, #FAFAF8)' }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6" style={{ color: '#0A1628' }}>Seamless integration with <span style={{ color: '#C9A961' }}>your case management system</span></h2>
-          <p className="text-lg mb-12 leading-relaxed max-w-3xl mx-auto" style={{ color: '#64748B' }}>
-            We operate and integrate directly within Filevine, Smokeball, Litify, CASEpeer, and all major platforms. Our case managers are specifically trained on each CMS—working inside your existing tools, following your workflows. Every document, update, and communication flows directly into your system. Your team sees everything in real-time, nothing falls through the cracks.
-          </p>
-          <p className="text-base font-bold mb-8 uppercase tracking-wider" style={{ color: '#0A1628' }}>Integrates with leading case management platforms</p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            <div className="bg-white rounded-xl p-6 shadow-md flex items-center justify-center h-24">
-              <img src="/images/filevine.png" alt="Filevine" className="max-h-12 max-w-full object-contain" />
+      {/* World-class statement — full bleed */}
+      <div style={{ backgroundColor: '#FFFFFF', overflow: 'hidden', position: 'relative' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            <div>
+              <div className="w-12 h-px mb-8" style={{ backgroundColor: '#C9A961' }} />
+              <h2 className="font-serif font-bold leading-tight" style={{ color: '#000000', fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
+                World-class infrastructure.<br />
+                <span style={{ color: '#C9A961' }}>Fractional cost.</span>
+              </h2>
             </div>
-            <div className="bg-white rounded-xl p-6 shadow-md flex items-center justify-center h-24">
-              <img src="/images/smokeball.png" alt="Smokeball" className="max-h-12 max-w-full object-contain" />
+            <div className="md:max-w-sm">
+              <p className="text-base leading-relaxed mb-6" style={{ color: '#2B3544' }}>
+                Everything a top PI firm needs to operate at scale — without the executive salaries, office overhead, or hiring risk.
+              </p>
+              <button
+                onClick={() => {}}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '8px',
+                  padding: '12px 28px', fontSize: '0.75rem', fontWeight: '700',
+                  letterSpacing: '0.08em', border: '1px solid #C9A961',
+                  backgroundColor: 'transparent', color: '#C9A961', cursor: 'pointer', transition: 'all 0.2s',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#C9A961'; e.currentTarget.style.color = '#FFFFFF'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#C9A961'; }}
+              >
+                VIEW ALL SERVICES <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </div>
-            <div className="bg-white rounded-xl p-6 shadow-md flex items-center justify-center h-24">
-              <img src="/images/litify.png" alt="Litify" className="max-h-12 max-w-full object-contain" />
+          </div>
+        </div>
+      </div>
+
+      <section ref={integrationRef} className={`py-24 ${integrationVisible ? 'animate-fade-in-down' : 'opacity-0'}`} style={{ backgroundColor: '#0F1E35' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header row */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#C9A961' }}>Integrations</p>
+              <h2 className="font-serif text-4xl md:text-5xl font-bold leading-tight" style={{ color: '#FFFFFF' }}>
+                Works inside the tools<br />your firm already uses
+              </h2>
             </div>
-            <div className="bg-white rounded-xl p-6 shadow-md flex items-center justify-center h-24">
-              <img src="/images/casepeer.png" alt="CASEpeer" className="max-h-12 max-w-full object-contain" />
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-md flex items-center justify-center h-24">
-              <img src="/images/mycase.png" alt="MyCase" className="max-h-12 max-w-full object-contain" />
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-md flex items-center justify-center h-24">
-              <img src="/images/clio.png" alt="Clio" className="max-h-12 max-w-full object-contain" />
-            </div>
+            <p className="text-base leading-relaxed md:max-w-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>
+              Our case managers are trained on each platform — working directly inside your CMS, following your workflows, with every update flowing in real-time.
+            </p>
+          </div>
+
+          {/* Logo strip — clean bordered cells, no shadow boxes */}
+          <div className="grid grid-cols-3 md:grid-cols-6" style={{ border: '1px solid rgba(201,169,97,0.3)' }}>
+            {[
+              { src: '/images/filevine.png', alt: 'Filevine' },
+              { src: '/images/smokeball.png', alt: 'Smokeball' },
+              { src: '/images/litify.png', alt: 'Litify' },
+              { src: '/images/casepeer.png', alt: 'CASEpeer' },
+              { src: '/images/mycase.png', alt: 'MyCase' },
+              { src: '/images/clio.png', alt: 'Clio' },
+            ].map(({ src, alt }, i) => (
+              <div
+                key={alt}
+                className="flex items-center justify-center py-10 px-6 transition-all duration-200"
+                style={{
+                  borderRight: i < 5 ? '1px solid rgba(201,169,97,0.2)' : 'none',
+                  backgroundColor: 'transparent',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
+              >
+                <img src={src} alt={alt} className="max-h-10 max-w-full object-contain transition-all" style={{ opacity: 0.7, filter: 'brightness(0) invert(1)' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.7'; }}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -876,34 +1143,59 @@ export default function Home({ onNavigateContact, onNavigate }) {
           <div className="text-center">
             <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4" style={{ color: '#0A1628' }}>Built by PI veterans who've managed <span style={{ color: '#C9A961' }}>thousands of cases</span></h2>
             <p className="text-xl max-w-3xl mx-auto" style={{ color: '#64748B' }}>
-              LawBOX's team brings decades of operational experience from the nation's top personal injury firms, having helped recover millions in settlements. We combine this deep expertise with advanced AI to deliver results you can trust.
+              LawBOX™'s team brings decades of operational experience from the nation's top personal injury firms, having helped recover millions in settlements. We combine this deep expertise with advanced AI to deliver results you can trust.
             </p>
           </div>
-          
-
         </div>
       </section>
 
-      <section ref={trustRef} className={`py-16 bg-white ${trustVisible ? 'animate-fade-in-down' : 'opacity-0'}`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4" style={{ color: '#0A1628' }}>Security and transparency you can trust</h2>
-            <p className="text-xl" style={{ color: '#64748B' }}>
-              The control, compliance, and peace of mind you need to scale confidently
-            </p>
+      {/* AI powered humans section */}
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: '#F8F7F2' }}>
+        <div className="max-w-3xl mx-auto">
+          {/* Trust badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-10" style={{ backgroundColor: '#C9A961' }}>
+            <span className="w-2 h-2 rounded-full bg-white flex-shrink-0"></span>
+            <span className="text-white text-sm font-semibold">Trusted by top personal injury firms nationwide</span>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card>
-              <h3 className="text-lg font-semibold mb-2">Your brand, amplified</h3>
-              <p className="text-sm text-slate-600">LawBOX staff operate as extensions...</p>
-            </Card>
-            <Card>
-              <h3 className="text-lg font-semibold mb-2">Trained on excellence</h3>
-              <p className="text-sm text-slate-600">Every team member trained on PI workflows...</p>
-            </Card>
+
+          {/* How It Works tag */}
+          <div className="mb-6">
+            <span className="inline-block px-4 py-1 text-xs font-bold uppercase tracking-widest text-white" style={{ backgroundColor: '#C9A961' }}>How It Works</span>
+          </div>
+
+          {/* Headline */}
+          <h2 className="font-serif font-bold leading-tight mb-6" style={{ color: '#0A1628', fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}>
+            AI powered humans in the loop operations team handles your{' '}
+            <span style={{ color: '#C9A961' }}>cases from intake to demand</span>
+          </h2>
+
+          {/* Subtext */}
+          <p className="text-base md:text-lg leading-relaxed mb-8 mx-auto" style={{ color: '#64748B', maxWidth: '560px' }}>
+            From the moment a lead comes in to final settlement, LawBOX™ manages every case for one flat fee. No more hiring, training, or managing case staff.
+          </p>
+
+          {/* CTA Button */}
+          <button
+            onClick={onNavigateContact}
+            className="inline-flex items-center gap-2 font-bold px-7 py-3 rounded-md transition-all mb-16"
+            style={{ backgroundColor: '#C9A961', color: '#FFFFFF', fontSize: '1rem', border: 'none', cursor: 'pointer' }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#B8941F'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#C9A961'; }}
+          >
+            Schedule a Call <ArrowRight className="w-4 h-4" />
+          </button>
+
+          {/* Testimonial */}
+          <div>
+            <div className="text-6xl font-serif mb-4" style={{ color: 'rgba(201,169,97,0.3)', lineHeight: 1 }}>"</div>
+            <p className="font-serif italic text-xl md:text-2xl leading-relaxed mb-6" style={{ color: '#0A1628' }}>
+              LawBOX™ reduced our case prep time by 60% while increasing our settlement values. It's like having a dedicated ops team without the overhead.
+            </p>
+            <p className="text-sm font-bold" style={{ color: '#C9A961' }}>— Sarah Chen, Managing Partner, Chen &amp; Associates</p>
           </div>
         </div>
       </section>
+
 
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0">
@@ -938,7 +1230,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>
-              <div className="text-2xl font-bold text-white mb-4" style={{ fontFamily: 'Space Grotesk, -apple-system, sans-serif', letterSpacing: '-0.01em' }}>LawBOX</div>
+              <div className="text-2xl font-bold text-white mb-4" style={{ fontFamily: 'Space Grotesk, -apple-system, sans-serif', letterSpacing: '-0.01em' }}>LawBOX™</div>
               <p className="text-sm mb-6" style={{ color: '#FAFAF8' }}>
                 Scale your firm. Not your overhead.
               </p>
@@ -955,10 +1247,10 @@ export default function Home({ onNavigateContact, onNavigate }) {
             <div>
               <h4 className="font-bold mb-4 text-white">Services</h4>
               <ul className="space-y-3 text-sm" style={{ color: '#64748B' }}>
-                <li><a href="#services" className="transition-colors" onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#64748B'}>Pre Litigation</a></li>
-                <li><a href="#services" className="transition-colors" onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#64748B'}>Case Management</a></li>
-                <li><a href="#services" className="transition-colors" onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#64748B'}>Medical Chronologies</a></li>
-                <li><a href="#services" className="transition-colors" onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#64748B'}>Litigation Support</a></li>
+                <li><button style={{ color: "#64748B", background: "none", border: "none", cursor: "pointer", padding: 0 }} onMouseEnter={(e) => e.target.style.color = "#C9A961"} onMouseLeave={(e) => e.target.style.color = "#64748B"} onClick={() => document.getElementById("lawfirm-in-a-box")?.scrollIntoView({ behavior: "smooth" })}>End to End</button></li>
+                <li><button style={{ color: "#64748B", background: "none", border: "none", cursor: "pointer", padding: 0 }} onMouseEnter={(e) => e.target.style.color = "#C9A961"} onMouseLeave={(e) => e.target.style.color = "#64748B"} onClick={() => onNavigate("policy-limits")}>Policy Limits</button></li>
+                <li><button style={{ color: "#64748B", background: "none", border: "none", cursor: "pointer", padding: 0 }} onMouseEnter={(e) => e.target.style.color = "#C9A961"} onMouseLeave={(e) => e.target.style.color = "#64748B"} onClick={() => onNavigate("lien-resolution")}>Lien Resolution</button></li>
+                <li><button style={{ color: "#64748B", background: "none", border: "none", cursor: "pointer", padding: 0 }} onMouseEnter={(e) => e.target.style.color = "#C9A961"} onMouseLeave={(e) => e.target.style.color = "#64748B"} onClick={() => onNavigate("settlement-disbursement")}>Settlement Disbursements</button></li>
               </ul>
             </div>
             
@@ -982,7 +1274,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
           
           <div className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4" style={{ borderColor: '#2B3544' }}>
             <div className="text-sm" style={{ color: '#64748B' }}>
-              © 2026 LawBOX. All rights reserved.
+              © 2026 LawBOX™. All rights reserved.
             </div>
             <div className="flex items-center gap-6 text-sm" style={{ color: '#64748B' }}>
               <span className="flex items-center gap-2">
