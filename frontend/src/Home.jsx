@@ -381,7 +381,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
           />
           <div
             className="absolute z-20 flex flex-col items-start"
-            style={{ left: '52%', bottom: '200px', transform: 'translateX(-50%)' }}
+            style={{ left: '46%', bottom: '200px', transform: 'translateX(-50%)' }}
           >
             <div className="flex flex-col items-start">
               <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '2.2rem', letterSpacing: '-0.03em' }}>
