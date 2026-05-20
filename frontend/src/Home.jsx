@@ -71,6 +71,17 @@ export default function Home({ onNavigateContact, onNavigate }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cSuiteOpen, setCSuiteOpen] = useState(false);
   const [desktopCSuiteOpen, setDesktopCSuiteOpen] = useState(false);
+  const heroRef = useRef(null);
+  const [heroInView, setHeroInView] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroInView(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    if (heroRef.current) observer.observe(heroRef.current);
+    return () => { if (heroRef.current) observer.unobserve(heroRef.current); };
+  }, []);
   const [socialProofRef, socialProofVisible] = useScrollReveal();
   const [differentiatorRef, differentiatorVisible] = useScrollReveal();
   const [valuePropRef, valuePropVisible] = useScrollReveal();
@@ -83,6 +94,27 @@ export default function Home({ onNavigateContact, onNavigate }) {
 
   return (
     <main className="min-h-screen bg-white overflow-x-hidden">
+      {/* PIAAS + MSOAAS fixed overlay — mobile only, hides when hero scrolls away */}
+      {heroInView && (
+        <div
+          className="md:hidden fixed z-50 flex flex-col items-start pointer-events-none"
+          style={{ left: '39%', bottom: '250px', transform: 'translateX(-50%)' }}
+        >
+          <div className="flex flex-col items-start">
+            <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '0.75rem', letterSpacing: '-0.03em' }}>
+              PIAAS<sup style={{ fontSize: '0.32em', verticalAlign: 'super' }}>&#8482;</sup>
+            </span>
+            <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.32rem', fontWeight: 700, letterSpacing: '0.14em' }}>PI as a Service</p>
+          </div>
+          <span className="font-serif ml-4" style={{ color: '#C9A961', fontSize: '0.55rem', fontWeight: 900, lineHeight: 1 }}>+</span>
+          <div className="flex flex-col items-start">
+            <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '0.75rem', letterSpacing: '-0.03em' }}>
+              MSOAAS<sup style={{ fontSize: '0.32em', verticalAlign: 'super' }}>&#8482;</sup>
+            </span>
+            <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.32rem', fontWeight: 700, letterSpacing: '0.14em' }}>MSO as a Service</p>
+          </div>
+        </div>
+      )}
       <style>{`
         @keyframes fadeInDown {
           from {
@@ -139,7 +171,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
         }
         .marquee-track {
           display: flex;
-          animation: marquee 35s linear infinite;
+          animation: marquee 22s linear infinite;
           width: max-content;
         }
         .marquee-track:hover {
@@ -391,7 +423,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
         </div>
 
         {/* Mobile hero */}
-        <div className="relative md:hidden z-10 overflow-hidden" style={{ height: 'calc(100dvh - 38px)', minHeight: '0', backgroundColor: '#F5F5F5' }}>
+        <div ref={heroRef} className="relative md:hidden z-10 overflow-hidden" style={{ height: 'calc(100dvh - 38px)', minHeight: '0', backgroundColor: '#F5F5F5' }}>
           <img
             src="/images/mobile.png"
             alt=""
@@ -403,24 +435,6 @@ export default function Home({ onNavigateContact, onNavigate }) {
             className="absolute inset-x-0 bottom-0 pointer-events-none"
             style={{ height: '120px', background: 'linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.6))' }}
           />
-          <div
-            className="absolute z-20 flex flex-col items-start"
-            style={{ left: '39%', bottom: '200px', transform: 'translateX(-50%)' }}
-          >
-            <div className="flex flex-col items-start">
-              <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '1.1rem', letterSpacing: '-0.03em' }}>
-                PIAAS<sup style={{ fontSize: '0.32em', verticalAlign: 'super' }}>&#8482;</sup>
-              </span>
-              <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.45rem', fontWeight: 700, letterSpacing: '0.14em' }}>PI as a Service</p>
-            </div>
-            <span className="font-serif ml-7" style={{ color: '#C9A961', fontSize: '0.8rem', fontWeight: 900, lineHeight: 1 }}>+</span>
-            <div className="flex flex-col items-start">
-              <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '1.1rem', letterSpacing: '-0.03em' }}>
-                MSOAAS<sup style={{ fontSize: '0.32em', verticalAlign: 'super' }}>&#8482;</sup>
-              </span>
-              <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.45rem', fontWeight: 700, letterSpacing: '0.14em' }}>MSO as a Service</p>
-            </div>
-          </div>
         </div>
 
         {/* Desktop: hero content */}
