@@ -52,6 +52,20 @@ const CheckCircle2 = ({ className }) => (
   </svg>
 );
 
+const C_SUITE_SERVICES = [
+  { label: 'Chief Operating Officer', id: 'fractional-coo' },
+  { label: 'Chief Financial Officer', id: 'fractional-cfo' },
+  { label: 'Chief Information Officer', id: 'fractional-cio' },
+  { label: 'Chief Marketing Officer', id: 'fractional-cmo' },
+  { label: 'Chief AI Officer', id: 'fractional-caio' },
+];
+
+const ADDITIONAL_SUPPORT_SERVICES = [
+  { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' },
+  { label: 'HR & Payroll', id: 'hr-payroll' },
+  { label: 'Tax Strategy', id: 'tax-strategy' },
+];
+
 export default function Home({ onNavigateContact, onNavigate }) {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -152,6 +166,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
         <img
           src="/images/hero-office.jpg.png"
           alt=""
+          fetchpriority="high"
           className="hidden md:block absolute inset-0 z-0 w-full h-full object-cover object-[center_30%]"
         />
 
@@ -159,25 +174,13 @@ export default function Home({ onNavigateContact, onNavigate }) {
         <div className="hidden md:block absolute bottom-0 left-0 right-0 z-10 pointer-events-none" style={{ height: '140px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.68))' }} />
 
         {/* Navigation - inside hero for seamless background */}
-        <nav className="relative z-50">
+        <nav className="absolute md:relative top-0 left-0 w-full z-50">
           <div className="w-full px-4">
             <div className="flex items-center justify-between h-16 md:h-20">
 
               {/* Left: About first, Services last */}
               <div className="hidden md:flex items-center gap-8 ml-32">
                 <a href="#team" className="text-base font-bold transition-colors" style={{ color: '#FFFFFF' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}>About</a>
-                <a href="#how-it-works" className="text-base font-bold transition-colors" style={{ color: '#FFFFFF' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}>How We Work</a>
-                <a href="#lawfirm-in-a-box" className="text-base font-bold transition-colors" style={{ color: '#FFFFFF' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}>LawFirm In A Box</a>
-                <button
-                  className="text-base font-bold transition-colors"
-                  style={{ color: '#FFFFFF', background: 'none', border: 'none', cursor: 'pointer' }}
-                  onMouseEnter={(e) => e.target.style.color = '#C9A961'}
-                  onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}
-                  onClick={() => onNavigate('metrics')}
-                >
-                  Metrics
-                </button>
-
                 {/* Services Dropdown — 4 columns */}
                 <div className="relative group">
                   <button className="text-base font-bold transition-colors flex items-center gap-1" style={{ color: '#FFFFFF', background: 'none', border: 'none', cursor: 'pointer' }}>
@@ -186,9 +189,9 @@ export default function Home({ onNavigateContact, onNavigate }) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-[760px] max-w-[calc(100vw-2rem)] hidden group-hover:block" style={{ paddingTop: '8px' }}>
+                  <div className="absolute top-full left-0 hidden group-hover:block" style={{ paddingTop: '8px', width: '860px', maxWidth: 'calc(100vw - 2rem)' }}>
                       <div className="rounded-lg shadow-2xl" style={{ backgroundColor: '#0A1628', border: '1px solid rgba(201, 169, 97, 0.2)' }}>
-                        <div className="grid grid-cols-4 gap-6 p-8">
+                        <div className="grid grid-cols-4 gap-5 p-8">
                           {/* Pre-Litigation Services */}
                           <div>
                             <h3 className="text-xs font-bold mb-4 pb-2 border-b uppercase tracking-wider" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Pre-Litigation Services</h3>
@@ -202,17 +205,18 @@ export default function Home({ onNavigateContact, onNavigate }) {
                           {/* Additional Support Services */}
                           <div>
                             <h3 className="text-xs font-bold mb-4 pb-2 border-b uppercase tracking-wider" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Additional Support Services</h3>
-                            <ul className="space-y-2">
-                              {[
-                                { label: 'Chief Operating Officer', id: 'fractional-coo' },
-                                { label: 'Chief Financial Officer', id: 'fractional-cfo' },
-                                { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' },
-                                { label: 'HR & Payroll', id: 'hr-payroll' },
-                                { label: 'Chief Information Officer', id: 'fractional-cio' },
-                                { label: 'Chief Marketing Officer', id: 'fractional-cmo' },
-                                { label: 'Chief AI Officer', id: 'fractional-caio' },
-                                { label: 'Tax Strategy', id: 'tax-strategy' },
-                              ].map(({ label, id }) => (
+                            <ul className="space-y-3">
+                              <li>
+                                <div className="text-xs font-bold uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.85)' }}>C-Suite</div>
+                                <ul className="mt-2 ml-3 space-y-1.5">
+                                  {C_SUITE_SERVICES.map(({ label, id }) => (
+                                    <li key={id}>
+                                      <button onClick={() => { onNavigate(id); setServicesDropdownOpen(false); }} className="text-xs block py-0.5 transition-colors text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => (e.target.style.color = '#C9A961')} onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.7)')}>{label}</button>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </li>
+                              {ADDITIONAL_SUPPORT_SERVICES.map(({ label, id }) => (
                                 <li key={id}>
                                   <button onClick={() => { onNavigate(id); setServicesDropdownOpen(false); }} className="text-xs block py-1 transition-colors text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => (e.target.style.color = '#C9A961')} onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.7)')}>{label}</button>
                                 </li>
@@ -228,11 +232,11 @@ export default function Home({ onNavigateContact, onNavigate }) {
                               ))}
                             </ul>
                           </div>
-                          {/* Advisory */}
+                          {/* Advisory + PE */}
                           <div>
-                            <h3 className="text-xs font-bold mb-4 pb-2 border-b uppercase tracking-wider" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Advisory</h3>
+                            <h3 className="text-xs font-bold mb-4 pb-2 border-b uppercase tracking-wider" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Advisory + PE</h3>
                             <ul className="space-y-2">
-                              {['Mergers & Acquisitions', 'Management Services Organization', 'Alternative Business Structure', 'AI Hub & Innovation Advisory'].map((label) => (
+                              {['Mergers & Acquisitions', 'MSOAAS', 'AI Hub & Innovation Advisory'].map((label) => (
                                 <li key={label}><a href="#support-services" className="text-xs block py-1 transition-colors" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'} onClick={() => setServicesDropdownOpen(false)}>{label}</a></li>
                               ))}
                             </ul>
@@ -241,6 +245,18 @@ export default function Home({ onNavigateContact, onNavigate }) {
                       </div>
                   </div>
                 </div>
+                <a href="#how-it-works" className="text-base font-bold transition-colors" style={{ color: '#FFFFFF' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}>How We Work</a>
+                <a href="#lawfirm-in-a-box" className="text-base font-bold transition-colors" style={{ color: '#FFFFFF' }} onMouseEnter={(e) => e.target.style.color = '#C9A961'} onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}>LawFirm In A Box</a>
+                <button
+                  className="text-base font-bold transition-colors"
+                  style={{ color: '#FFFFFF', background: 'none', border: 'none', cursor: 'pointer' }}
+                  onMouseEnter={(e) => e.target.style.color = '#C9A961'}
+                  onMouseLeave={(e) => e.target.style.color = '#FFFFFF'}
+                  onClick={() => onNavigate('metrics')}
+                >
+                  Metrics
+                </button>
+
 
               </div>
 
@@ -264,6 +280,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
           {mobileMenuOpen && (
             <div className="md:hidden max-h-[70vh] overflow-y-auto animate-slide-down" style={{ backgroundColor: '#0A1628' }}>
               <div className="px-4 pt-2 pb-4 space-y-4">
+                <a href="#team" className="block py-2 text-base font-bold" style={{ color: '#FFFFFF' }} onClick={() => setMobileMenuOpen(false)}>About</a>
                 <a href="#how-it-works" className="block py-2 text-base font-bold" style={{ color: '#FFFFFF' }} onClick={() => setMobileMenuOpen(false)}>How We Work</a>
                 <a href="#lawfirm-in-a-box" className="block py-2 text-base font-bold" style={{ color: '#FFFFFF' }} onClick={() => setMobileMenuOpen(false)}>LawFirm In A Box</a>
                 <button
@@ -289,8 +306,16 @@ export default function Home({ onNavigateContact, onNavigate }) {
                     </div>
                     <div>
                       <h4 className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.7)' }}>Additional Support Services</h4>
-                      <ul className="space-y-1">
-                        {[{ label: 'Chief Operating Officer', id: 'fractional-coo' }, { label: 'Chief Financial Officer', id: 'fractional-cfo' }, { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' }, { label: 'HR & Payroll', id: 'hr-payroll' }, { label: 'Chief Information Officer', id: 'fractional-cio' }, { label: 'Chief Marketing Officer', id: 'fractional-cmo' }, { label: 'Chief AI Officer', id: 'fractional-caio' }, { label: 'Tax Strategy', id: 'tax-strategy' }].map(({ label, id }) => (
+                      <ul className="space-y-2">
+                        <li>
+                          <div className="text-xs font-bold uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.85)' }}>C-Suite</div>
+                          <ul className="ml-3 mt-1 space-y-1">
+                            {C_SUITE_SERVICES.map(({ label, id }) => (
+                              <li key={id}><button onClick={() => { onNavigate(id); setMobileMenuOpen(false); }} className="block py-0.5 text-xs text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}>{label}</button></li>
+                            ))}
+                          </ul>
+                        </li>
+                        {ADDITIONAL_SUPPORT_SERVICES.map(({ label, id }) => (
                           <li key={id}><button onClick={() => { onNavigate(id); setMobileMenuOpen(false); }} className="block py-0.5 text-xs text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}>{label}</button></li>
                         ))}
                       </ul>
@@ -304,9 +329,9 @@ export default function Home({ onNavigateContact, onNavigate }) {
                       </ul>
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.7)' }}>Advisory</h4>
+                      <h4 className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.7)' }}>Advisory + PE</h4>
                       <ul className="space-y-1">
-                        {['Mergers & Acquisitions', 'Management Services Organization', 'Alternative Business Structure', 'AI Hub & Innovation Advisory'].map((label) => (
+                        {['Mergers & Acquisitions', 'MSOAAS', 'AI Hub & Innovation Advisory'].map((label) => (
                           <li key={label}><a href="#support-services" className="block py-0.5 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }} onClick={() => setMobileMenuOpen(false)}>{label}</a></li>
                         ))}
                       </ul>
@@ -314,31 +339,63 @@ export default function Home({ onNavigateContact, onNavigate }) {
                   </div>
                 </div>
                 
-                <a href="#team" className="block py-2 text-base font-bold" style={{ color: '#FFFFFF' }} onClick={() => setMobileMenuOpen(false)}>About</a>
               </div>
             </div>
           )}
         </nav>
         
         {/* Mobile: image only */}
-        <div className="relative md:hidden z-10">
-          <img src="/images/hero-office.jpg.png" alt="" className="w-full block" />
+        <div className="hidden">
+          <img src="/images/hero-office.jpg.png" alt="" className="w-full block" fetchpriority="high" style={{ width: '100%', height: 'auto' }} />
         </div>
 
         {/* Mobile: PIAAS + MSOAAS white bar */}
-        <div className="md:hidden z-10 bg-white px-4 pt-14 pb-2 flex items-center justify-center gap-3">
+        <div className="hidden">
           <div className="flex flex-col items-center">
-            <span className="font-serif font-bold" style={{ color: '#000000', fontSize: '0.85rem', letterSpacing: '-0.01em' }}>
+            <span className="font-serif font-bold" style={{ color: '#000000', fontSize: '1.6rem', letterSpacing: '-0.01em' }}>
               PIAAS<sup style={{ fontSize: '0.4em', verticalAlign: 'super' }}>™</sup>
             </span>
-            <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.45rem', fontWeight: 700, letterSpacing: '0.1em' }}>PI as a Service</p>
+            <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em' }}>PI as a Service</p>
           </div>
-          <span style={{ color: '#C9A961', fontWeight: 900, fontSize: '0.85rem' }}>+</span>
+          <span style={{ color: '#C9A961', fontWeight: 900, fontSize: '1.6rem' }}>+</span>
           <div className="flex flex-col items-center">
-            <span className="font-serif font-bold" style={{ color: '#000000', fontSize: '0.85rem', letterSpacing: '-0.01em' }}>
+            <span className="font-serif font-bold" style={{ color: '#000000', fontSize: '1.6rem', letterSpacing: '-0.01em' }}>
               MSOAAS<sup style={{ fontSize: '0.4em', verticalAlign: 'super' }}>™</sup>
             </span>
-            <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.45rem', fontWeight: 700, letterSpacing: '0.1em' }}>MSO as a Service</p>
+            <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em' }}>MSO as a Service</p>
+          </div>
+        </div>
+
+        {/* Mobile hero */}
+        <div className="relative md:hidden z-10 overflow-hidden" style={{ height: 'calc(100dvh - 38px)', minHeight: '0', backgroundColor: '#F5F5F5' }}>
+          <img
+            src="/images/hero-office.jpg%20(1)%20(2).png"
+            alt=""
+            className="w-full h-full block"
+            fetchpriority="high"
+            style={{ objectFit: 'cover', objectPosition: '20% 20%' }}
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 pointer-events-none"
+            style={{ height: '120px', background: 'linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.6))' }}
+          />
+          <div
+            className="absolute z-20 flex flex-col items-start"
+            style={{ left: '52%', top: '62%', transform: 'translate(-50%, -50%)' }}
+          >
+            <div className="flex flex-col items-start">
+              <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '2.2rem', letterSpacing: '-0.03em' }}>
+                PIAAS<sup style={{ fontSize: '0.32em', verticalAlign: 'super' }}>&#8482;</sup>
+              </span>
+              <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.14em' }}>PI as a Service</p>
+            </div>
+            <span className="font-serif ml-14" style={{ color: '#C9A961', fontSize: '1.6rem', fontWeight: 900, lineHeight: 1 }}>+</span>
+            <div className="flex flex-col items-start">
+              <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '2.2rem', letterSpacing: '-0.03em' }}>
+                MSOAAS<sup style={{ fontSize: '0.32em', verticalAlign: 'super' }}>&#8482;</sup>
+              </span>
+              <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.14em' }}>MSO as a Service</p>
+            </div>
           </div>
         </div>
 
@@ -369,7 +426,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
         </div>
 
         {/* Stats bar — sits inside blur at bottom of hero */}
-        <div className="stats-bar-bg md:absolute md:bottom-0 md:left-0 md:right-0 z-20">
+        <div className="stats-bar-bg hidden md:block md:absolute md:bottom-0 md:left-0 md:right-0 z-20">
           <div className="w-full px-4 md:px-5">
             <div className="py-2 flex flex-col md:flex-row md:items-center md:ml-10 gap-1 md:gap-6">
               <p className="md:hidden font-serif font-bold text-center" style={{ color: '#FFFFFF', fontSize: 'clamp(0.75rem, 1.5vw, 1.4rem)' }}>
@@ -380,19 +437,24 @@ export default function Home({ onNavigateContact, onNavigate }) {
               </p>
               <div className="hidden md:block" style={{ width: '1px', alignSelf: 'stretch', backgroundColor: 'rgba(0,0,0,0.4)' }} />
               <p className="hidden md:block font-serif font-bold whitespace-nowrap" style={{ color: '#000000', fontSize: 'clamp(0.75rem, 1.5vw, 1.4rem)' }}>
-                Scale Your Practice &nbsp;&nbsp;·&nbsp;&nbsp; Reduce Overhead &nbsp;&nbsp;·&nbsp;&nbsp; Reduce Time On Desk(TOD)
+                Scale Your Practice &nbsp;&nbsp;&middot;&nbsp;&nbsp; Reduce Overhead &nbsp;&nbsp;&middot;&nbsp;&nbsp; Reduce Time On Desk(TOD)
               </p>
             </div>
           </div>
         </div>
 
         {/* Mobile: Scale your practice bar */}
-        <div className="md:hidden z-20 py-2 px-4 flex justify-center" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="hidden z-20 py-2 px-4 flex justify-center" style={{ backgroundColor: '#FFFFFF' }}>
           <p className="font-serif font-bold text-center" style={{ color: '#000000', fontSize: 'clamp(0.75rem, 1.5vw, 1.4rem)' }}>
             Reduce Overhead &nbsp;·&nbsp; Scale Your Practice &nbsp;·&nbsp; Reduce Time On Desk
           </p>
         </div>
 
+        <div className="md:hidden z-20 flex items-center justify-center px-2" style={{ backgroundColor: '#9E9E9E', height: '44px' }}>
+          <p className="font-serif font-bold text-center" style={{ color: '#000000', fontSize: '0.7rem', lineHeight: 1.2 }}>
+            AI Powered Pre-Lit Platform &nbsp;&middot;&nbsp; Scale Your Practice &nbsp;&middot;&nbsp; Reduce Overhead &nbsp;&middot;&nbsp; Reduce Time On Desk
+          </p>
+        </div>
       </section>
 
       {/* Human Centric + AI Section */}
@@ -524,7 +586,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
               </div>
 
               {/* Policy Limits */}
-              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px' }}>
+              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px', cursor: 'pointer' }} onClick={() => onNavigate("policy-limits")}>
                 <svg className="w-8 h-8 mb-2 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
@@ -587,7 +649,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
               </div>
 
               {/* Lien Resolution */}
-              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px' }}>
+              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px', cursor: 'pointer' }} onClick={() => onNavigate("lien-resolution")}>
                 <svg className="w-8 h-8 mb-2 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 14l2 2 4-4M7 4H4a1 1 0 00-1 1v14a1 1 0 001 1h16a1 1 0 001-1V5a1 1 0 00-1-1h-3M9 4h6a1 1 0 011 1v0a1 1 0 01-1 1H9a1 1 0 01-1-1v0a1 1 0 011-1z" />
                 </svg>
@@ -603,7 +665,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
               </div>
 
               {/* Settlement Disbursements */}
-              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px' }}>
+              <div className="flex flex-col items-center justify-center text-center border-2 rounded-xl p-3 w-full md:flex-1 min-w-0" style={{ borderColor: '#C9A961', backgroundColor: 'transparent', minHeight: '120px', cursor: 'pointer' }} onClick={() => onNavigate("settlement-disbursement")}>
                 <svg className="w-8 h-8 mb-2 flex-shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -1005,18 +1067,32 @@ export default function Home({ onNavigateContact, onNavigate }) {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* Fractional Services */}
+            {/* Additional Support Services */}
             <div className="bg-white rounded-lg p-8 border" style={{ borderColor: '#E5E7EB' }}>
-              <h3 className="text-xl font-bold mb-6 pb-3" style={{ color: '#0A1628', borderBottom: '2px solid #C9A961' }}>Fractional Services</h3>
+              <h3 className="text-xl font-bold mb-6 pb-3" style={{ color: '#0A1628', borderBottom: '2px solid #C9A961' }}>Additional Support Services</h3>
+              <div className="mb-6">
+                <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: '#C9A961' }}>C-Suite</p>
+                <ul className="space-y-3">
+                  {C_SUITE_SERVICES.map(({ label, id }) => (
+                    <li key={id}>
+                      <button
+                        onClick={() => onNavigate(id)}
+                        className="leading-relaxed text-left w-full transition-colors"
+                        style={{ color: '#2B3544', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = '#C9A961')}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = '#2B3544')}
+                      >
+                        {label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
               <ul className="space-y-3">
                 {[
-                  { label: 'Chief Information Officer', id: 'fractional-cio' },
-                  { label: 'Chief Operating Officer', id: 'fractional-coo' },
-                  { label: 'Chief Financial Officer', id: 'fractional-cfo' },
-                  { label: 'Chief Marketing Officer', id: 'fractional-cmo' },
-                  { label: 'Chief AI Officer', id: 'fractional-caio' },
-                  { label: 'Tax Strategist', id: 'tax-strategy' },
+                  { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' },
                   { label: 'Payroll & HR', id: 'hr-payroll' },
+                  { label: 'Tax Strategy', id: 'tax-strategy' },
                 ].map(({ label, id }) => (
                   <li key={id}>
                     <button
@@ -1044,13 +1120,12 @@ export default function Home({ onNavigateContact, onNavigate }) {
               </ul>
             </div>
 
-            {/* Advisory */}
+            {/* Advisory + PE */}
             <div className="bg-white rounded-lg p-8 border" style={{ borderColor: '#E5E7EB' }}>
-              <h3 className="text-xl font-bold mb-6 pb-3" style={{ color: '#0A1628', borderBottom: '2px solid #C9A961' }}>Advisory</h3>
+              <h3 className="text-xl font-bold mb-6 pb-3" style={{ color: '#0A1628', borderBottom: '2px solid #C9A961' }}>Advisory + PE</h3>
               <ul className="space-y-3" style={{ color: '#2B3544' }}>
                 <li className="leading-relaxed">Mergers & Acquisitions</li>
-                <li className="leading-relaxed">Management Services Organization</li>
-                <li className="leading-relaxed">Alternative Business Structure</li>
+                <li className="leading-relaxed">MSOAAS</li>
                 <li className="leading-relaxed">AI Hub & Innovation Advisory</li>
               </ul>
             </div>
@@ -1288,3 +1363,5 @@ export default function Home({ onNavigateContact, onNavigate }) {
     </main>
   );
 }
+
+

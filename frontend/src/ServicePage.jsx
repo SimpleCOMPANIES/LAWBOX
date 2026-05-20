@@ -2,6 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './components/ui/Button';
 import Logo from './components/Logo';
 
+const C_SUITE_SERVICES = [
+  { label: 'Chief Operating Officer', id: 'fractional-coo' },
+  { label: 'Chief Financial Officer', id: 'fractional-cfo' },
+  { label: 'Chief Information Officer', id: 'fractional-cio' },
+  { label: 'Chief Marketing Officer', id: 'fractional-cmo' },
+  { label: 'Chief AI Officer', id: 'fractional-caio' },
+];
+
+const ADDITIONAL_SUPPORT_SERVICES = [
+  { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' },
+  { label: 'HR & Payroll', id: 'hr-payroll' },
+  { label: 'Tax Strategy', id: 'tax-strategy' },
+];
+
 const SERVICE_DATA = {
   'fractional-coo': {
     title: 'Fractional COO',
@@ -55,7 +69,6 @@ const SERVICE_DATA = {
     subtitle: 'Law-firm-specific bookkeeping built for plaintiff practices',
     description: [
       "LawBOX provides bookkeeping support designed for PI firms, including client cost tracking, settlement-related accounting support, trust workflows, and monthly reconciliations. This is built around how plaintiff firms actually operate—not generic small-business bookkeeping.",
-      "Abacus Advisors' law-firm services emphasize monthly reconciliations, client-level accounting for client costs and trust transactions, bill pay for firm and client expenses, settlement support, and IOLTA cleanup, which is the right operational benchmark for this category. (abacusadv.com)",
     ],
     sections: [
       {
@@ -82,7 +95,6 @@ const SERVICE_DATA = {
           'Trust workflow process controls to reduce errors',
           'Settlement-to-trust-to-disbursement process alignment',
         ],
-        note: "Abacus explicitly highlights IOLTA cleanup to reconcile IOLTA balances with client information and client-level accounting for trust transactions, which is exactly the standard PI firms need in this area. (abacusadv.com)",
       },
     ],
     why: [
@@ -99,7 +111,6 @@ const SERVICE_DATA = {
     subtitle: 'People operations and payroll administration for growing PI teams',
     description: [
       "As PI firms scale, payroll and HR admin consume leadership time. LawBOX provides hands-on HR and payroll support so attorneys and operators can focus on case production and firm growth instead of back-office tasks.",
-      "Abacus's positioning is useful here: they emphasize a single point of contact and reducing the firm's administrative burden around payroll changes and HR administration. (abacusadv.com)",
     ],
     includes: [
       'Payroll administration support',
@@ -374,22 +385,31 @@ function NavBar({ onNavigate, onNavigateContact }) {
               </button>
 
               {servicesDropdownOpen && (
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-2 w-[720px] max-w-[calc(100vw-2rem)]">
+                <div className="absolute top-full left-0 pt-2" style={{ width: '820px', maxWidth: 'calc(100vw - 2rem)' }}>
                   <div className="rounded-lg shadow-2xl" style={{ backgroundColor: '#0A1628', border: '1px solid rgba(201, 169, 97, 0.2)' }}>
                     <div className="grid grid-cols-3 gap-6 p-8">
                       <div>
-                        <h3 className="text-sm font-bold mb-4 pb-2 border-b" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Fractional Services</h3>
-                        <ul className="space-y-2">
-                          {[
-                            { label: 'Chief Operating Officer', id: 'fractional-coo' },
-                            { label: 'Chief Financial Officer', id: 'fractional-cfo' },
-                            { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' },
-                            { label: 'HR & Payroll', id: 'hr-payroll' },
-                            { label: 'Chief Information Officer', id: 'fractional-cio' },
-                            { label: 'Chief Marketing Officer', id: 'fractional-cmo' },
-                            { label: 'Chief AI Officer', id: 'fractional-caio' },
-                            { label: 'Tax Strategy', id: 'tax-strategy' },
-                          ].map(({ label, id }) => (
+                        <h3 className="text-sm font-bold mb-4 pb-2 border-b" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Additional Support Services</h3>
+                        <ul className="space-y-3">
+                          <li>
+                            <div className="text-xs font-bold uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.85)' }}>C-Suite</div>
+                            <ul className="mt-2 ml-3 space-y-1.5">
+                              {C_SUITE_SERVICES.map(({ label, id }) => (
+                                <li key={id}>
+                                  <button
+                                    onClick={() => { onNavigate(id); setServicesDropdownOpen(false); }}
+                                    className="text-xs block py-0.5 transition-colors text-left w-full"
+                                    style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}
+                                    onMouseEnter={(e) => (e.target.style.color = '#C9A961')}
+                                    onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.7)')}
+                                  >
+                                    {label}
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                          {ADDITIONAL_SUPPORT_SERVICES.map(({ label, id }) => (
                             <li key={id}>
                               <button
                                 onClick={() => { onNavigate(id); setServicesDropdownOpen(false); }}
@@ -419,9 +439,9 @@ function NavBar({ onNavigate, onNavigateContact }) {
                       </div>
 
                       <div>
-                        <h3 className="text-sm font-bold mb-4 pb-2 border-b" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Advisory</h3>
+                        <h3 className="text-sm font-bold mb-4 pb-2 border-b" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Advisory + PE</h3>
                         <ul className="space-y-2">
-                          {['Mergers & Acquisitions', 'Management Services Organization', 'Alternative Business Structure', 'AI Hub & Innovation Advisory'].map((item) => (
+                          {['Mergers & Acquisitions', 'MSOAAS', 'AI Hub & Innovation Advisory'].map((item) => (
                             <li key={item}>
                               <button className="text-xs block py-1 transition-colors text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => (e.target.style.color = '#C9A961')} onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.7)')}>
                                 {item}
@@ -466,18 +486,24 @@ function NavBar({ onNavigate, onNavigateContact }) {
             <button onClick={() => { onNavigate('home'); setMobileMenuOpen(false); }} className="block w-full text-left py-2 text-sm font-semibold" style={{ color: 'rgba(255, 255, 255, 0.85)', background: 'none', border: 'none', cursor: 'pointer' }}>
               Home
             </button>
-            <div className="py-2 text-sm font-semibold" style={{ color: '#C9A961' }}>Fractional Services</div>
+            <div className="py-2 text-sm font-semibold" style={{ color: '#C9A961' }}>Additional Support Services</div>
             <div className="ml-4 space-y-2">
-              {[
-                { label: 'Chief Operating Officer', id: 'fractional-coo' },
-                { label: 'Chief Financial Officer', id: 'fractional-cfo' },
-                { label: 'Bookkeeping & IOLTA', id: 'bookkeeping' },
-                { label: 'HR & Payroll', id: 'hr-payroll' },
-                { label: 'Chief Information Officer', id: 'fractional-cio' },
-                { label: 'Chief Marketing Officer', id: 'fractional-cmo' },
-                { label: 'Chief AI Officer', id: 'fractional-caio' },
-                { label: 'Tax Strategy', id: 'tax-strategy' },
-              ].map(({ label, id }) => (
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.85)' }}>C-Suite</div>
+                <div className="ml-3 mt-1 space-y-1">
+                  {C_SUITE_SERVICES.map(({ label, id }) => (
+                    <button
+                      key={id}
+                      onClick={() => { onNavigate(id); setMobileMenuOpen(false); }}
+                      className="block w-full text-left py-1 text-xs"
+                      style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {ADDITIONAL_SUPPORT_SERVICES.map(({ label, id }) => (
                 <button
                   key={id}
                   onClick={() => { onNavigate(id); setMobileMenuOpen(false); }}
@@ -760,3 +786,4 @@ export default function ServicePage({ serviceId, onNavigate, onNavigateContact }
     </main>
   );
 }
+
