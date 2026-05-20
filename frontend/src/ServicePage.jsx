@@ -203,7 +203,6 @@ const SERVICE_DATA = {
 
   'policy-limits': {
     title: 'Policy Limits',
-    subtitle: 'Pre-suit insurance investigation and coverage tracing. Coordinated through Coastal Research.',
     customSections: [
       {
         type: 'header-para',
@@ -213,7 +212,7 @@ const SERVICE_DATA = {
       {
         type: 'header-para',
         heading: 'What We Deliver',
-        body: 'A structured pre-suit insurance investigation that traces every available coverage source before the demand letter goes out. The investigation reviews primary policies, excess layers, umbrella policies, additional insured endorsements, scheduled vehicles, and employer-level coverage. Results are documented, reportable, and delivered fast enough to inform your treatment plan, your UIM strategy, and your demand timing. LawBOX™ coordinates this through Coastal Research, a pre-litigation research partner used by top personal injury firms across the country.',
+        body: 'A structured pre-suit insurance investigation that traces every available coverage source before the demand letter goes out. The investigation reviews primary policies, excess layers, umbrella policies, additional insured endorsements, scheduled vehicles, and employer-level coverage. Results are documented, reportable, and delivered fast enough to inform your treatment plan, your UIM strategy, and your demand timing.',
       },
       {
         type: 'numbered-benefits',
@@ -232,7 +231,7 @@ const SERVICE_DATA = {
 
   'lien-resolution': {
     title: 'Lien Resolution',
-    subtitle: 'Audit, negotiation, appeals, and final release of every medical lien. Coordinated through Zipliens.',
+    subtitle: 'Audit, negotiation, appeals, and final release of every medical lien.',
     customSections: [
       {
         type: 'header-para',
@@ -242,9 +241,7 @@ const SERVICE_DATA = {
       {
         type: 'header-para',
         heading: 'What We Deliver',
-        body: 'End-to-end lien handling across every category of medical lien, subrogation claim, and reimbursement obligation. Specialists audit and review each submitted lien, request and analyze supporting documentation, verify claim validity and payment accuracy, negotiate reductions and waivers, manage appeals and dispute correspondence where appropriate, and obtain final lien releases and proof of satisfaction. Status updates are delivered throughout the process so your firm always knows where each lien stands without chasing it down. LawBOX™ coordinates this through Zipliens, a lien resolution partner trusted by top personal injury firms nationwide.',
-      },
-      {
+        body: 'End-to-end lien handling across every category of medical lien, subrogation claim, and reimbursement obligation. Specialists audit and review each submitted lien, request and analyze supporting documentation, verify claim validity and payment accuracy, negotiate reductions and waivers, manage appeals and dispute correspondence where appropriate, and obtain final lien releases and proof of satisfaction. Status updates are delivered throughout the process so your firm always knows where each lien stands without chasing it down.',
         type: 'numbered-benefits',
         heading: 'The Benefits',
         items: [
@@ -261,7 +258,7 @@ const SERVICE_DATA = {
 
   'settlement-disbursement': {
     title: 'Settlement Disbursement',
-    subtitle: 'Digital disbursement and trust money management for injury law firms. Coordinated through Confido Legal.',
+    subtitle: 'Digital disbursement and trust money management for injury law firms',
     customSections: [
       {
         type: 'header-para',
@@ -271,7 +268,7 @@ const SERVICE_DATA = {
       {
         type: 'header-para',
         heading: 'What We Deliver',
-        body: 'Digital disbursement and trust money management designed specifically for personal injury firms. The moment a settlement is finalized, a single workflow triggers — automatic splits to client, lienholders, medical providers, referral counsel, and the firm — routed straight from your trust or operating account with a full audit trail. Paper checks disappear, manual reconciliation collapses, and trust accounting compliance is built into every transaction. LawBOX™ coordinates this through Confido Legal, a payments and money management platform built specifically for personal injury law firms.',
+        body: 'Digital disbursement and trust money management designed specifically for personal injury firms. The moment a settlement is finalized, a single workflow triggers — automatic splits to client, lienholders, medical providers, referral counsel, and the firm — routed straight from your trust or operating account with a full audit trail. Paper checks disappear, manual reconciliation collapses, and trust accounting compliance is built into every transaction.',
       },
       {
         type: 'numbered-benefits',
@@ -320,7 +317,6 @@ const SERVICE_DATA = {
         type: 'subsection',
         heading: 'B) Settlement Tax Planning Coordination (Client-Facing Support Infrastructure)',
         description: "This is not legal or tax advice to the plaintiff. It is a coordination layer that helps the firm identify when specialized settlement tax planning should be introduced.",
-        note: "Amicus's settlement planning framework highlights strategies and issues that matter in taxable settlements, including: tax treatment varies based on what the settlement is compensating for, structured settlement annuities, Plaintiff Recovery Trust planning concepts, allocation of damages in settlement agreements, and medical expense allocation planning where applicable. (Amicus Settlement Planners)\n\nAmicus also emphasizes that documentation and allocation language matter, and that tax outcomes can change materially depending on settlement structure and categories of damages. (Amicus Settlement Planners)",
         includesLabel: 'What LawBOX can provide (coordination role)',
         includes: [
           'Intake flagging for potentially taxable settlement categories',
