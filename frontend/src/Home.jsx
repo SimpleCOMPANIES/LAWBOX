@@ -69,6 +69,8 @@ const ADDITIONAL_SUPPORT_SERVICES = [
 export default function Home({ onNavigateContact, onNavigate }) {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cSuiteOpen, setCSuiteOpen] = useState(false);
+  const [desktopCSuiteOpen, setDesktopCSuiteOpen] = useState(false);
   const [socialProofRef, socialProofVisible] = useScrollReveal();
   const [differentiatorRef, differentiatorVisible] = useScrollReveal();
   const [valuePropRef, valuePropVisible] = useScrollReveal();
@@ -207,14 +209,25 @@ export default function Home({ onNavigateContact, onNavigate }) {
                             <h3 className="text-xs font-bold mb-4 pb-2 border-b uppercase tracking-wider" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Additional Support Services</h3>
                             <ul className="space-y-3">
                               <li>
-                                <div className="text-xs font-bold uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.85)' }}>C-Suite</div>
-                                <ul className="mt-2 ml-3 space-y-1.5">
-                                  {C_SUITE_SERVICES.map(({ label, id }) => (
-                                    <li key={id}>
-                                      <button onClick={() => { onNavigate(id); setServicesDropdownOpen(false); }} className="text-xs block py-0.5 transition-colors text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => (e.target.style.color = '#C9A961')} onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.7)')}>{label}</button>
-                                    </li>
-                                  ))}
-                                </ul>
+                                <button
+                                  className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider w-full text-left"
+                                  style={{ color: 'rgba(201, 169, 97, 0.85)', background: 'none', border: 'none', cursor: 'pointer' }}
+                                  onClick={() => setDesktopCSuiteOpen(o => !o)}
+                                >
+                                  C-Suite
+                                  <svg className="w-3 h-3 transition-transform" style={{ transform: desktopCSuiteOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                  </svg>
+                                </button>
+                                {desktopCSuiteOpen && (
+                                  <ul className="mt-2 ml-3 space-y-1.5">
+                                    {C_SUITE_SERVICES.map(({ label, id }) => (
+                                      <li key={id}>
+                                        <button onClick={() => { onNavigate(id); setServicesDropdownOpen(false); setDesktopCSuiteOpen(false); }} className="text-xs block py-0.5 transition-colors text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => (e.target.style.color = '#C9A961')} onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.7)')}>{label}</button>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
                               </li>
                               {ADDITIONAL_SUPPORT_SERVICES.map(({ label, id }) => (
                                 <li key={id}>
@@ -308,12 +321,23 @@ export default function Home({ onNavigateContact, onNavigate }) {
                       <h4 className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.7)' }}>Additional Support Services</h4>
                       <ul className="space-y-2">
                         <li>
-                          <div className="text-xs font-bold uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.85)' }}>C-Suite</div>
-                          <ul className="ml-3 mt-1 space-y-1">
-                            {C_SUITE_SERVICES.map(({ label, id }) => (
-                              <li key={id}><button onClick={() => { onNavigate(id); setMobileMenuOpen(false); }} className="block py-0.5 text-xs text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}>{label}</button></li>
-                            ))}
-                          </ul>
+                          <button
+                            className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider w-full text-left"
+                            style={{ color: 'rgba(201, 169, 97, 0.85)', background: 'none', border: 'none', cursor: 'pointer' }}
+                            onClick={() => setCSuiteOpen(o => !o)}
+                          >
+                            C-Suite
+                            <svg className="w-3 h-3 transition-transform" style={{ transform: cSuiteOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                          {cSuiteOpen && (
+                            <ul className="ml-3 mt-1 space-y-1">
+                              {C_SUITE_SERVICES.map(({ label, id }) => (
+                                <li key={id}><button onClick={() => { onNavigate(id); setMobileMenuOpen(false); }} className="block py-0.5 text-xs text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}>{label}</button></li>
+                              ))}
+                            </ul>
+                          )}
                         </li>
                         {ADDITIONAL_SUPPORT_SERVICES.map(({ label, id }) => (
                           <li key={id}><button onClick={() => { onNavigate(id); setMobileMenuOpen(false); }} className="block py-0.5 text-xs text-left w-full" style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}>{label}</button></li>
@@ -384,17 +408,17 @@ export default function Home({ onNavigateContact, onNavigate }) {
             style={{ left: '39%', bottom: '200px', transform: 'translateX(-50%)' }}
           >
             <div className="flex flex-col items-start">
-              <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '2.2rem', letterSpacing: '-0.03em' }}>
+              <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '1.1rem', letterSpacing: '-0.03em' }}>
                 PIAAS<sup style={{ fontSize: '0.32em', verticalAlign: 'super' }}>&#8482;</sup>
               </span>
-              <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.14em' }}>PI as a Service</p>
+              <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.45rem', fontWeight: 700, letterSpacing: '0.14em' }}>PI as a Service</p>
             </div>
-            <span className="font-serif ml-14" style={{ color: '#C9A961', fontSize: '1.6rem', fontWeight: 900, lineHeight: 1 }}>+</span>
+            <span className="font-serif ml-7" style={{ color: '#C9A961', fontSize: '0.8rem', fontWeight: 900, lineHeight: 1 }}>+</span>
             <div className="flex flex-col items-start">
-              <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '2.2rem', letterSpacing: '-0.03em' }}>
+              <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '1.1rem', letterSpacing: '-0.03em' }}>
                 MSOAAS<sup style={{ fontSize: '0.32em', verticalAlign: 'super' }}>&#8482;</sup>
               </span>
-              <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.14em' }}>MSO as a Service</p>
+              <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.45rem', fontWeight: 700, letterSpacing: '0.14em' }}>MSO as a Service</p>
             </div>
           </div>
         </div>
@@ -458,27 +482,27 @@ export default function Home({ onNavigateContact, onNavigate }) {
       </section>
 
       {/* Human Centric + AI Section */}
-      <section className="py-20 md:py-32 text-center px-6 md:px-8" style={{ backgroundColor: '#0F1E35' }}>
-        <div className="max-w-4xl mx-auto flex flex-col items-center" style={{ minHeight: '680px' }}>
-          <h2 className="font-serif font-bold text-white mb-8 leading-tight" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.2rem)' }}>
+      <section className="py-20 md:py-32 text-center px-6 md:px-8" style={{ background: 'linear-gradient(to bottom, #FAFAF8, #FFFFFF)' }}>
+        <div className="max-w-4xl mx-auto flex flex-col items-center">
+          <h2 className="font-serif font-bold mb-8 leading-tight" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.2rem)', color: '#0A1628' }}>
             Agents + Humans + AI<br />=<br />
             <span className="inline-flex flex-wrap justify-center gap-x-3 gap-y-4 mt-2">
-              <span style={{ border: '2px solid #FFFFFF', padding: '0.2rem 0.8rem' }}>More Cases</span>
-              <span style={{ border: '2px solid #FFFFFF', padding: '0.2rem 0.8rem' }}><span style={{ color: '#FF0000' }}>Less</span> Overhead</span>
-              <span style={{ border: '2px solid #FFFFFF', padding: '0.2rem 0.8rem' }}><span style={{ color: '#FF0000' }}>Less</span> Time On Desk</span>
-              <span style={{ border: '2px solid #FFFFFF', padding: '0.2rem 0.8rem' }}><span style={{ color: '#FF0000' }}>Less</span> Staff</span>
-              <span style={{ border: '2px solid #FFFFFF', padding: '0.2rem 0.8rem' }}>Superior Client Comm</span>
+              <span style={{ border: '2px solid #0A1628', padding: '0.2rem 0.8rem' }}>More Cases</span>
+              <span style={{ border: '2px solid #0A1628', padding: '0.2rem 0.8rem' }}><span style={{ color: '#C9A961' }}>Less</span> Overhead</span>
+              <span style={{ border: '2px solid #0A1628', padding: '0.2rem 0.8rem' }}><span style={{ color: '#C9A961' }}>Less</span> Time On Desk</span>
+              <span style={{ border: '2px solid #0A1628', padding: '0.2rem 0.8rem' }}><span style={{ color: '#C9A961' }}>Less</span> Staff</span>
+              <span style={{ border: '2px solid #0A1628', padding: '0.2rem 0.8rem' }}>Superior Client Comm</span>
             </span>
           </h2>
-          <p className="text-base md:text-xl leading-relaxed mx-auto mt-16" style={{ color: '#FFFFFF', maxWidth: '680px' }}>
+          <p className="text-base md:text-xl leading-relaxed mx-auto mt-16" style={{ color: '#64748B', maxWidth: '680px' }}>
             LawBOX™ is the nation's Gold Standard for AI powered end to end pre-litigation. Effortlessly remove friction from Intake to Settlement, handle more cases with less overhead.
           </p>
           <button
             onClick={onNavigateContact}
-            className="font-bold px-8 py-3 rounded-md transition-all mt-auto"
-            style={{ backgroundColor: '#FFFFFF', color: '#0F1E35', fontSize: '1rem', border: 'none', cursor: 'pointer' }}
-            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#C9A961'; e.currentTarget.style.color = '#FFFFFF'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; e.currentTarget.style.color = '#0F1E35'; }}
+            className="font-bold px-8 py-3 rounded-md transition-all mt-8"
+            style={{ backgroundColor: '#C9A961', color: '#FFFFFF', fontSize: '1rem', border: 'none', cursor: 'pointer' }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#B8941F'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#C9A961'; }}
           >
             Schedule a Call
           </button>

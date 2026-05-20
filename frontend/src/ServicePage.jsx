@@ -346,6 +346,7 @@ function NavBar({ onNavigate, onNavigateContact }) {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cSuiteOpen, setCSuiteOpen] = useState(false);
+  const [desktopCSuiteOpen, setDesktopCSuiteOpen] = useState(false);
 
   return (
     <nav className="relative z-50">
@@ -389,22 +390,33 @@ function NavBar({ onNavigate, onNavigateContact }) {
                         <h3 className="text-sm font-bold mb-4 pb-2 border-b" style={{ color: '#C9A961', borderColor: 'rgba(201, 169, 97, 0.3)' }}>Additional Support Services</h3>
                         <ul className="space-y-3">
                           <li>
-                            <div className="text-xs font-bold uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.85)' }}>C-Suite</div>
-                            <ul className="mt-2 ml-3 space-y-1.5">
-                              {C_SUITE_SERVICES.map(({ label, id }) => (
-                                <li key={id}>
-                                  <button
-                                    onClick={() => { onNavigate(id); setServicesDropdownOpen(false); }}
-                                    className="text-xs block py-0.5 transition-colors text-left w-full"
-                                    style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}
-                                    onMouseEnter={(e) => (e.target.style.color = '#C9A961')}
-                                    onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.7)')}
-                                  >
-                                    {label}
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
+                            <button
+                              className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider w-full text-left"
+                              style={{ color: 'rgba(201, 169, 97, 0.85)', background: 'none', border: 'none', cursor: 'pointer' }}
+                              onClick={() => setDesktopCSuiteOpen(o => !o)}
+                            >
+                              C-Suite
+                              <svg className="w-3 h-3 transition-transform" style={{ transform: desktopCSuiteOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </button>
+                            {desktopCSuiteOpen && (
+                              <ul className="mt-2 ml-3 space-y-1.5">
+                                {C_SUITE_SERVICES.map(({ label, id }) => (
+                                  <li key={id}>
+                                    <button
+                                      onClick={() => { onNavigate(id); setServicesDropdownOpen(false); setDesktopCSuiteOpen(false); }}
+                                      className="text-xs block py-0.5 transition-colors text-left w-full"
+                                      style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}
+                                      onMouseEnter={(e) => (e.target.style.color = '#C9A961')}
+                                      onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.7)')}
+                                    >
+                                      {label}
+                                    </button>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </li>
                           {ADDITIONAL_SUPPORT_SERVICES.map(({ label, id }) => (
                             <li key={id}>
