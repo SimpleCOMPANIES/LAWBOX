@@ -98,7 +98,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
       {heroInView && (
         <div
           className="md:hidden fixed z-50 flex flex-col items-start pointer-events-none"
-          style={{ left: '39%', bottom: '320px', transform: 'translateX(-50%)' }}
+          style={{ left: '39%', bottom: '280px', transform: 'translateX(-50%)' }}
         >
           <div className="flex flex-col items-start">
             <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '0.75rem', letterSpacing: '-0.03em' }}>
