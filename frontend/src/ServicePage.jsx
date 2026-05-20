@@ -345,6 +345,7 @@ const SERVICE_DATA = {
 function NavBar({ onNavigate, onNavigateContact }) {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cSuiteOpen, setCSuiteOpen] = useState(false);
 
   return (
     <nav className="relative z-50">
@@ -485,19 +486,30 @@ function NavBar({ onNavigate, onNavigateContact }) {
             <div className="py-2 text-sm font-semibold" style={{ color: '#C9A961' }}>Additional Support Services</div>
             <div className="ml-4 space-y-2">
               <div>
-                <div className="text-xs font-bold uppercase tracking-wider" style={{ color: 'rgba(201, 169, 97, 0.85)' }}>C-Suite</div>
-                <div className="ml-3 mt-1 space-y-1">
-                  {C_SUITE_SERVICES.map(({ label, id }) => (
-                    <button
-                      key={id}
-                      onClick={() => { onNavigate(id); setMobileMenuOpen(false); }}
-                      className="block w-full text-left py-1 text-xs"
-                      style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
+                <button
+                  className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider w-full text-left"
+                  style={{ color: 'rgba(201, 169, 97, 0.85)', background: 'none', border: 'none', cursor: 'pointer' }}
+                  onClick={() => setCSuiteOpen(o => !o)}
+                >
+                  C-Suite
+                  <svg className="w-3 h-3 transition-transform" style={{ transform: cSuiteOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {cSuiteOpen && (
+                  <div className="ml-3 mt-1 space-y-1">
+                    {C_SUITE_SERVICES.map(({ label, id }) => (
+                      <button
+                        key={id}
+                        onClick={() => { onNavigate(id); setMobileMenuOpen(false); }}
+                        className="block w-full text-left py-1 text-xs"
+                        style={{ color: 'rgba(255, 255, 255, 0.7)', background: 'none', border: 'none', cursor: 'pointer' }}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               {ADDITIONAL_SUPPORT_SERVICES.map(({ label, id }) => (
                 <button
