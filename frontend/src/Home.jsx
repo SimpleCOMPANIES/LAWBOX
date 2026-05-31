@@ -404,24 +404,6 @@ export default function Home({ onNavigateContact, onNavigate }) {
             className="absolute inset-x-0 bottom-0 pointer-events-none"
             style={{ height: '120px', background: 'linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.6))' }}
           />
-          <div
-            className="absolute z-20 flex flex-col items-start"
-            style={{ left: '39%', bottom: '280px', transform: 'translateX(-50%)' }}
-          >
-            <div className="flex flex-col items-start">
-              <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '0.75rem', letterSpacing: '-0.03em' }}>
-                PIAAS<sup style={{ fontSize: '0.32em', verticalAlign: 'super' }}>&#8482;</sup>
-              </span>
-              <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.32rem', fontWeight: 700, letterSpacing: '0.14em' }}>PI as a Service</p>
-            </div>
-            <span className="font-serif ml-4" style={{ color: '#C9A961', fontSize: '0.55rem', fontWeight: 900, lineHeight: 1 }}>+</span>
-            <div className="flex flex-col items-start">
-              <span className="font-serif font-bold leading-none" style={{ color: '#000000', fontSize: '0.75rem', letterSpacing: '-0.03em' }}>
-                MSOAAS<sup style={{ fontSize: '0.32em', verticalAlign: 'super' }}>&#8482;</sup>
-              </span>
-              <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.32rem', fontWeight: 700, letterSpacing: '0.14em' }}>MSO as a Service</p>
-            </div>
-          </div>
         </div>
 
         {/* Desktop: hero content */}
