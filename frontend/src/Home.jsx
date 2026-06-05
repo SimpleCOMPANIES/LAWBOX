@@ -411,26 +411,6 @@ export default function Home({ onNavigateContact, onNavigate }) {
           />
         </div>
 
-        {/* Desktop: hero content */}
-        <div className="relative z-10 flex-1 hidden md:flex items-end justify-start pl-[23rem] pb-64">
-          <div>
-            <div className="flex flex-col mb-8 ml-8">
-              <div className="flex flex-col items-start">
-                <h1 className="font-serif leading-none" style={{ fontWeight: 700, color: '#000000', fontSize: 'clamp(1.2rem, 2.625vw, 2.25rem)', letterSpacing: '-0.02em' }}>
-                  PIAAS<sup style={{ fontSize: '0.35em', verticalAlign: 'super' }}>™</sup>
-                </h1>
-                <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em' }}>PI as a Service</p>
-              </div>
-              <span className="font-serif ml-24" style={{ color: '#C9A961', fontSize: 'clamp(1.05rem, 2.25vw, 1.875rem)', fontWeight: 900, lineHeight: 1 }}>+</span>
-              <div className="flex flex-col items-start">
-                <h1 className="font-serif leading-none" style={{ fontWeight: 700, color: '#000000', fontSize: 'clamp(1.2rem, 2.625vw, 2.25rem)', letterSpacing: '-0.02em' }}>
-                  MSOAAS<sup style={{ fontSize: '0.35em', verticalAlign: 'super' }}>™</sup>
-                </h1>
-                <p className="uppercase tracking-widest" style={{ color: '#000000', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em' }}>MSO as a Service</p>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Logo above stats bar — desktop only */}
         <div className="hidden md:block absolute right-6 z-30" style={{ bottom: 'calc(2.5rem + 50px)' }}>
