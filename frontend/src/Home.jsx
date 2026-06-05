@@ -71,6 +71,7 @@ export default function Home({ onNavigateContact, onNavigate }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cSuiteOpen, setCSuiteOpen] = useState(false);
   const [desktopCSuiteOpen, setDesktopCSuiteOpen] = useState(false);
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
   const heroRef = useRef(null);
   const [socialProofRef, socialProofVisible] = useScrollReveal();
   const [differentiatorRef, differentiatorVisible] = useScrollReveal();
@@ -170,7 +171,11 @@ export default function Home({ onNavigateContact, onNavigate }) {
           src="/images/hero-office.jpg.png"
           alt=""
           fetchpriority="high"
+          loading="eager"
+          decoding="async"
+          onLoad={() => setHeroImageLoaded(true)}
           className="hidden md:block absolute inset-0 z-0 w-full h-full object-cover object-[center_30%]"
+          style={{ transition: 'opacity 0.5s ease', opacity: heroImageLoaded ? 1 : 0 }}
         />
 
 {/* Bottom fade — desktop only */}
